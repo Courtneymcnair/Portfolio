@@ -1,26 +1,181 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Local @font-face — add Satoshi files to /public/fonts/satoshi/ to activate */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  /* Brand colors */
+  --color-brand-blue: #004BD6;
+  --color-brand-footer: #3250FF;
+  --color-brand-off-white: #F6F6FF;
+  --color-brand-card-light: #E7E8FC;
+  --color-brand-cream: #FAF9F5;
+  --color-text-muted: #545041;
+
+  /* Fonts */
+  --font-satoshi: 'Satoshi', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  /* Border radius */
+  --radius-pill: 851px;
+  --radius-go: 50px;
+  --radius-card: 8.52px;
+  --radius-circle: 9999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Satoshi', system-ui, sans-serif;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Typography scale ─────────────────────────────────────────────────────── */
+
+.text-hero {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  font-size: clamp(48px, 10vw, 110px);
+  line-height: 1;
+  letter-spacing: -7.76px;
+}
+
+.text-page-title {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  font-size: clamp(48px, 10vw, 119px);
+  line-height: 1;
+  letter-spacing: -2.39px;
+}
+
+.text-case-hero {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  font-size: clamp(26px, 4vw, 40px);
+  line-height: 1.3;
+  letter-spacing: -0.8px;
+}
+
+.text-section {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  font-size: clamp(22px, 3vw, 34px);
+  line-height: 1.1;
+}
+
+.text-card-title {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 2.5vw, 25.57px);
+  line-height: 1.3;
+}
+
+.text-hero-sub {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 2vw, 25.57px);
+  line-height: 1.3;
+}
+
+.text-overline {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 700;
+  font-size: 17.05px;
+  line-height: 1.3;
+  color: #545041;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.text-case-subtitle {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 500;
+  font-size: 17.05px;
+  line-height: 1.4;
+}
+
+.text-user-group {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 500;
+  font-size: 20.46px;
+  line-height: 1.3;
+}
+
+.text-body {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  font-size: 15.34px;
+  line-height: 1.6;
+}
+
+.text-logo {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 700;
+  font-size: 11.93px;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #545041;
+}
+
+.text-quote-attr {
+  font-family: 'Satoshi', sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+/* ─── Layout utilities ─────────────────────────────────────────────────────── */
+
+.content-width {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+@media (max-width: 768px) {
+  .content-width {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .text-hero {
+    letter-spacing: -3px;
+  }
+  .text-page-title {
+    letter-spacing: -1px;
+  }
 }
