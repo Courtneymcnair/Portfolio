@@ -39,3 +39,20 @@ npm run lint   # ESLint
 **Homepage visual effect:** The blue dome/arch at the top is achieved by a white `<div>` placed directly after the hero section — no clip-path or border-radius. The page background is `bg-brand-blue`; the white section sits on top of it.
 
 **Case study pages:** All share the same pattern — `bg-brand-off-white` hero + TL;DR, then white sections separated by `border-t border-black/10`. Sections use `SectionLabel` (H4 overline) + `SectionHeading` (H3).
+
+## inspect-canvas Integration
+
+When the user says "update this element", "change this", "fix this", or similar requests about a UI element:
+
+1. Read `.inspect-canvas.json` in the project root
+2. It contains the selected element's details:
+   - `tag` — HTML tag name
+   - `selector` — CSS selector path to the element
+   - `styles` — current computed styles
+   - `text` — visible text content
+   - `size` — rendered width/height
+   - `instruction` — what the user wants changed (if provided)
+3. Find the source file that renders this element
+4. Apply the requested change to the source code
+
+If `instruction` is present, follow it. If not, ask the user what they'd like to change.

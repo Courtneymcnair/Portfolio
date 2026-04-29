@@ -1,181 +1,185 @@
 @import "tailwindcss";
 
-/* Local @font-face — add Satoshi files to /public/fonts/satoshi/ to activate */
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/satoshi/Satoshi-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
+/* ─── Design system CSS custom properties ───────────────────────────────── */
+
+:root {
+  /* Colors */
+  --ink:           #0A0A0F;
+  --paper:         #F4F4F0;
+  --paper-warm:    #EFEEE6;
+  --paper-card:    #FFFFFF;
+  --accent:        #3250FF;
+  --accent-soft:   #4F6BFF;
+  --accent-tint:   #E5E9FF;
+  --accent-tint-2: #EEF1FF;
+  --accent-tint-3: #F5F7FF;
+  --grey-1:        #1A1A22;
+  --grey-2:        #6B6B78;
+  --grey-3:        #B5B5B0;
+  --grey-4:        #DDDDD6;
+  --grey-5:        #ECECE6;
+
+  /* Typography */
+  --serif: 'Instrument Serif', 'Times New Roman', serif;
+  --sans:  'Inter', system-ui, sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, monospace;
+
+  /* Radius — all buttons use --r-pill (999px) */
+  --r-xs:   6px;
+  --r-sm:   10px;
+  --r-md:   16px;
+  --r-lg:   22px;
+  --r-pill: 999px;
+
+  /* Shadows */
+  --shadow-1: 0 1px 2px rgba(20,30,80,0.04), 0 2px 6px rgba(20,30,80,0.04);
+  --shadow-2: 0 1px 2px rgba(20,30,80,0.04), 0 4px 14px rgba(20,30,80,0.06);
+  --shadow-3: 0 2px 4px rgba(20,30,80,0.05), 0 14px 36px rgba(20,30,80,0.08);
+  --shadow-4: 0 4px 10px rgba(20,30,80,0.06), 0 30px 70px rgba(50,80,255,0.12);
+
+  /* Hairlines */
+  --hair:      1px solid rgba(10,10,15,0.08);
+  --hair-2:    1px solid rgba(10,10,15,0.12);
+  --hair-blue: 1px solid rgba(50,80,255,0.18);
 }
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/satoshi/Satoshi-Italic.woff2') format('woff2');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/satoshi/Satoshi-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Satoshi';
-  src: url('/fonts/satoshi/Satoshi-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+
+/* ─── Tailwind theme tokens ────────────────────────────────────────────── */
 
 @theme {
-  /* Brand colors */
-  --color-brand-blue: #004BD6;
-  --color-brand-footer: #3250FF;
-  --color-brand-off-white: #F6F6FF;
-  --color-brand-card-light: #E7E8FC;
-  --color-brand-cream: #FAF9F5;
-  --color-text-muted: #545041;
+  /* Map new system into Tailwind utilities */
+  --color-ink:         #0A0A0F;
+  --color-paper:       #F4F4F0;
+  --color-paper-warm:  #EFEEE6;
+  --color-accent:      #3250FF;
+  --color-grey-1:      #1A1A22;
+  --color-grey-2:      #6B6B78;
+  --color-grey-3:      #B5B5B0;
+  --color-grey-4:      #DDDDD6;
+
+  /* Legacy — kept so existing case study pages don't break */
+  --color-brand-blue:      #3250FF;
+  --color-brand-footer:    #3250FF;
+  --color-brand-off-white: #F4F4F0;
+  --color-brand-card-light:#E5E9FF;
+  --color-brand-cream:     #EFEEE6;
+  --color-text-muted:      #6B6B78;
 
   /* Fonts */
-  --font-satoshi: 'Satoshi', system-ui, sans-serif;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', 'Times New Roman', serif;
+  --font-sans:  'Inter', system-ui, sans-serif;
+  --font-mono:  'JetBrains Mono', ui-monospace, monospace;
 
-  /* Border radius */
-  --radius-pill: 851px;
-  --radius-go: 50px;
-  --radius-card: 8.52px;
+  /* Radius */
+  --radius-pill:   999px;
+  --radius-xs:     6px;
+  --radius-sm:     10px;
+  --radius-md:     16px;
+  --radius-lg:     22px;
+  --radius-card:   16px;
+  --radius-go:     999px;
   --radius-circle: 9999px;
 }
+
+/* ─── Base ─────────────────────────────────────────────────────────────── */
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Satoshi', system-ui, sans-serif;
-  color: #000;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Typography scale ─────────────────────────────────────────────────────── */
-
-.text-hero {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 400;
-  font-size: clamp(48px, 10vw, 110px);
-  line-height: 1;
-  letter-spacing: -7.76px;
-}
-
-.text-page-title {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 400;
-  font-size: clamp(48px, 10vw, 119px);
-  line-height: 1;
-  letter-spacing: -2.39px;
-}
-
-.text-case-hero {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 400;
-  font-size: clamp(26px, 4vw, 40px);
-  line-height: 1.3;
-  letter-spacing: -0.8px;
-}
-
-.text-section {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 400;
-  font-size: clamp(22px, 3vw, 34px);
-  line-height: 1.1;
-}
-
-.text-card-title {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 400;
-  font-size: clamp(16px, 2.5vw, 25.57px);
-  line-height: 1.3;
-}
-
-.text-hero-sub {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 400;
-  font-size: clamp(16px, 2vw, 25.57px);
-  line-height: 1.3;
-}
-
-.text-overline {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 700;
-  font-size: 17.05px;
-  line-height: 1.3;
-  color: #545041;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-
-.text-case-subtitle {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 500;
-  font-size: 17.05px;
-  line-height: 1.4;
-}
-
-.text-user-group {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 500;
-  font-size: 20.46px;
-  line-height: 1.3;
-}
-
-.text-body {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 400;
-  font-size: 15.34px;
-  line-height: 1.6;
-}
-
-.text-logo {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 700;
-  font-size: 11.93px;
-  line-height: 1.3;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #545041;
-}
-
-.text-quote-attr {
-  font-family: 'Satoshi', sans-serif;
-  font-weight: 400;
-  font-style: italic;
-  font-size: 18px;
-  line-height: 1.3;
-}
-
-/* ─── Layout utilities ─────────────────────────────────────────────────────── */
+/* ─── Layout utilities ─────────────────────────────────────────────────── */
 
 .content-width {
-  max-width: 1100px;
+  max-width: 1180px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 80px;
+  padding-right: 80px;
 }
 
 @media (max-width: 768px) {
   .content-width {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 22px;
+    padding-right: 22px;
   }
-  .text-hero {
-    letter-spacing: -3px;
+  .site-footer {
+    padding: 40px 22px 32px !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
   }
-  .text-page-title {
-    letter-spacing: -1px;
+}
+
+/* ─── Select Works responsive layout ──────────────────────────────────── */
+
+.case-row {
+  display: grid;
+  grid-template-columns: minmax(0, 520px) 1fr;
+  column-gap: 80px;
+  align-items: center;
+}
+
+@media (max-width: 1100px) {
+  .case-row {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+    justify-items: center;
   }
+  .case-thumb {
+    order: -1;
+    margin-bottom: 32px;
+    width: clamp(260px, 45%, 420px);
+    justify-self: center;
+  }
+  .select-works-body {
+    padding: 80px 40px 80px !important;
+  }
+  .select-works-header {
+    padding: 48px 40px 36px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .select-works-body {
+    padding: 60px 22px 60px !important;
+  }
+  .select-works-header {
+    padding: 40px 22px 32px !important;
+  }
+  .case-row {
+    margin-bottom: 80px !important;
+  }
+}
+
+/* ─── Case study typography (used on /work/* pages) ───────────────────── */
+
+.cs-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--grey-2);
+  margin-bottom: 24px;
+}
+
+.cs-eyebrow .num {
+  color: var(--accent);
+}
+
+.cs-eyebrow .rule {
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--grey-2);
+  opacity: 0.4;
 }

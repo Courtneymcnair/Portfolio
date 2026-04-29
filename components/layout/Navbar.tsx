@@ -10,118 +10,188 @@ export default function Navbar() {
 
   const isWork = pathname === '/' || pathname.startsWith('/work');
   const isAbout = pathname === '/about';
-  const onBlueBg = pathname === '/';
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 h-[60px] flex items-center">
-        <div className="content-width w-full flex items-center justify-between">
-          {/* Logo */}
+      <nav
+        style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0,
+          zIndex: 50,
+          height: 64,
+          display: 'flex',
+          alignItems: 'center',
+          paddingLeft: 56,
+          paddingRight: 56,
+          justifyContent: 'space-between',
+          background: 'var(--paper)',
+          borderBottom: 'var(--hair)',
+        }}
+      >
+        {/* Logo / name */}
+        <Link
+          href="/"
+          style={{
+            fontFamily: 'var(--mono)',
+            fontSize: 12,
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            color: 'var(--ink)',
+            textDecoration: 'none',
+            opacity: 1,
+            transition: 'opacity 0.2s',
+          }}
+          onMouseEnter={e => (e.currentTarget.style.opacity = '0.5')}
+          onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
+        >
+          Courtney McNair
+        </Link>
+
+        {/* Center links */}
+        <div className="hidden md:flex" style={{ gap: 32, alignItems: 'center' }}>
           <Link
             href="/"
-            className={`text-logo transition-opacity hover:opacity-70 ${
-              onBlueBg ? '!text-white/70' : ''
-            }`}
+            style={{
+              fontFamily: 'var(--mono)',
+              fontSize: 12,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              color: isWork ? 'var(--accent)' : 'var(--ink)',
+              opacity: isWork ? 1 : 0.6,
+              transition: 'opacity 0.2s, color 0.2s',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+            onMouseLeave={e => (e.currentTarget.style.opacity = isWork ? '1' : '0.6')}
           >
-            Courtney McNair
+            Work
           </Link>
-
-          {/* Center nav links */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link
-              href="/"
-              className={`font-satoshi text-[18px] font-normal transition-colors ${
-                isWork
-                  ? onBlueBg
-                    ? 'text-white'
-                    : 'text-brand-blue'
-                  : onBlueBg
-                  ? 'text-white/70 hover:text-white'
-                  : 'text-black hover:text-brand-blue'
-              }`}
-            >
-              Work
-            </Link>
-            <Link
-              href="/about"
-              className={`font-satoshi text-[18px] font-normal transition-colors ${
-                isAbout
-                  ? onBlueBg
-                    ? 'text-white'
-                    : 'text-brand-blue'
-                  : onBlueBg
-                  ? 'text-white/70 hover:text-white'
-                  : 'text-black hover:text-brand-blue'
-              }`}
-            >
-              About
-            </Link>
-          </div>
-
-          {/* LinkedIn pill */}
-          <a
-            href="https://www.linkedin.com/in/courtney-mcnair/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`hidden md:flex items-center gap-2 px-5 py-2 rounded-full text-[14px] font-medium transition-colors border ${
-              onBlueBg
-                ? 'border-white/40 text-white hover:bg-white/10'
-                : 'border-black/20 text-black hover:bg-black/5'
-            }`}
+          <Link
+            href="/about"
+            style={{
+              fontFamily: 'var(--mono)',
+              fontSize: 12,
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              color: isAbout ? 'var(--accent)' : 'var(--ink)',
+              opacity: isAbout ? 1 : 0.6,
+              transition: 'opacity 0.2s, color 0.2s',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+            onMouseLeave={e => (e.currentTarget.style.opacity = isAbout ? '1' : '0.6')}
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-            </svg>
-            LinkedIn
-          </a>
-
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobileOpen(true)}
-            className={`md:hidden font-satoshi text-[16px] font-medium ${
-              onBlueBg ? 'text-white' : 'text-black'
-            }`}
-            aria-label="Open navigation"
-          >
-            Menu
-          </button>
+            About
+          </Link>
         </div>
+
+        {/* LinkedIn pill */}
+        <a
+          href="https://www.linkedin.com/in/courtney-mcnair/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:flex"
+          style={{
+            alignItems: 'center',
+            gap: 8,
+            padding: '6px 16px',
+            borderRadius: 'var(--r-pill)',
+            border: 'var(--hair-2)',
+            fontFamily: 'var(--mono)',
+            fontSize: 11,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'var(--ink)',
+            textDecoration: 'none',
+            transition: 'background 0.2s, color 0.2s',
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLElement).style.background = 'var(--accent-tint)';
+            (e.currentTarget as HTMLElement).style.color = 'var(--accent)';
+            (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)';
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLElement).style.background = 'transparent';
+            (e.currentTarget as HTMLElement).style.color = 'var(--ink)';
+            (e.currentTarget as HTMLElement).style.borderColor = 'rgba(10,10,15,0.12)';
+          }}
+        >
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+          </svg>
+          LinkedIn
+        </a>
+
+        {/* Mobile menu button */}
+        <button
+          onClick={() => setMobileOpen(true)}
+          className="md:hidden"
+          style={{
+            fontFamily: 'var(--mono)',
+            fontSize: 12,
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            color: 'var(--ink)',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+          }}
+          aria-label="Open navigation"
+        >
+          Menu
+        </button>
       </nav>
 
-      {/* Mobile nav overlay */}
+      {/* Mobile overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[100] bg-white flex flex-col">
-          <div className="flex items-center justify-end h-[60px] px-6">
+        <div
+          style={{
+            position: 'fixed', inset: 0, zIndex: 100,
+            background: 'var(--paper)',
+            display: 'flex', flexDirection: 'column',
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'flex-end', height: 64, alignItems: 'center', paddingRight: 22 }}>
             <button
               onClick={() => setMobileOpen(false)}
-              className="text-black text-[24px] font-light leading-none"
+              style={{
+                fontFamily: 'var(--mono)', fontSize: 12, letterSpacing: '0.08em',
+                textTransform: 'uppercase', color: 'var(--ink)',
+                background: 'none', border: 'none', cursor: 'pointer',
+              }}
               aria-label="Close navigation"
             >
-              ✕
+              Close
             </button>
           </div>
-          <div className="flex flex-col items-center justify-center flex-1 gap-10">
-            <Link
-              href="/"
-              onClick={() => setMobileOpen(false)}
-              className={`font-satoshi text-[28px] ${isWork ? 'text-brand-blue' : 'text-black'}`}
-            >
-              Work
-            </Link>
-            <Link
-              href="/about"
-              onClick={() => setMobileOpen(false)}
-              className={`font-satoshi text-[28px] ${isAbout ? 'text-brand-blue' : 'text-black'}`}
-            >
-              About
-            </Link>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 40 }}>
+            {[
+              { href: '/', label: 'Work', active: isWork },
+              { href: '/about', label: 'About', active: isAbout },
+            ].map(({ href, label, active }) => (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setMobileOpen(false)}
+                style={{
+                  fontFamily: 'var(--serif)', fontSize: 48,
+                  color: active ? 'var(--accent)' : 'var(--ink)',
+                  textDecoration: 'none',
+                }}
+              >
+                {label}
+              </Link>
+            ))}
             <a
               href="https://www.linkedin.com/in/courtney-mcnair/"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-satoshi text-[28px] text-black"
+              style={{
+                fontFamily: 'var(--mono)', fontSize: 12, letterSpacing: '0.08em',
+                textTransform: 'uppercase', color: 'var(--grey-2)', textDecoration: 'none',
+              }}
             >
-              LinkedIn
+              LinkedIn ↗
             </a>
           </div>
         </div>
