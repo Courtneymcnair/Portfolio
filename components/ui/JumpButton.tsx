@@ -7,7 +7,19 @@ export default function JumpButton({ href, label = 'Jump to Final Design' }: Jum
   return (
     <a
       href={href}
-      className="inline-flex items-center px-6 h-[43px] rounded-pill bg-brand-footer text-white font-satoshi text-[18px] font-normal hover:opacity-90 transition-opacity"
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        padding: '12px 28px',
+        borderRadius: 'var(--r-pill)',
+        background: 'var(--accent)',
+        color: '#fff',
+        fontFamily: 'var(--sans)',
+        fontSize: 16,
+        fontWeight: 500,
+        textDecoration: 'none',
+        transition: 'opacity 0.2s',
+      }}
     >
       {label}
     </a>

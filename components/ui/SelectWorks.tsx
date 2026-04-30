@@ -10,7 +10,7 @@ const CASES = [
   {
     n: '01',
     title: 'Operations Management Platform',
-    pills: ['0→1', 'B2B SaaS', 'Design Systems', 'Sole Designer'],
+    pills: ['0→1', 'B2B SaaS', 'Sole Designer'],
     brief:
       'Shipping complex operational workflows at startup speed while building design infrastructure from the ground up.',
     metric: '0→1 foundation',
@@ -21,7 +21,7 @@ const CASES = [
   {
     n: '02',
     title: 'Open-Access Sign Language Dictionary',
-    pills: ['Accessibility', 'Research', 'Video UX', 'Lead Designer'],
+    pills: ['Accessibility', 'Lead Designer'],
     brief:
       'Led the design of a freely available video dictionary making FSL resources accessible to deaf and hard-of-hearing communities.',
     metric: 'Open-access launch',

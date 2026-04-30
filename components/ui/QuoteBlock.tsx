@@ -6,9 +6,30 @@ interface QuoteBlockProps {
 export default function QuoteBlock({ quote, attribution }: QuoteBlockProps) {
   return (
     <div>
-      <p className="text-section text-black mb-3">&ldquo;{quote}&rdquo;</p>
+      <p
+        style={{
+          fontFamily: 'var(--serif)',
+          fontWeight: 400,
+          fontSize: 'clamp(22px, 2.5vw, 28px)',
+          lineHeight: 1.3,
+          color: 'var(--ink)',
+          marginBottom: attribution ? 8 : 0,
+        }}
+      >
+        &ldquo;{quote}&rdquo;
+      </p>
       {attribution && (
-        <p className="text-quote-attr text-text-muted">{attribution}</p>
+        <p
+          style={{
+            fontFamily: 'var(--mono)',
+            fontSize: 11,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: 'var(--grey-2)',
+          }}
+        >
+          {attribution}
+        </p>
       )}
     </div>
   );
