@@ -44,3 +44,9 @@ next-env.d.ts
 .claude/
 .agents/
 skills-lock.json
+
+*storybook.log
+storybook-static
+
+# design handoff exports (kept local only)
+/design_handoff_*
