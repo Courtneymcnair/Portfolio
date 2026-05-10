@@ -8,6 +8,8 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  if (pathname.startsWith('/sandbox')) return null;
+
   const isWork = pathname === '/' || pathname.startsWith('/work');
   const isAbout = pathname === '/about';
 

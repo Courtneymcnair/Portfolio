@@ -1,0 +1,174 @@
+/**
+ * Warm System — design tokens for the editorial/gradient direction.
+ *
+ * Loaded only by the warm Storybook (.storybook-warm/preview.ts).
+ * Does NOT affect the main portfolio routes or the existing Storybook.
+ *
+ * All tokens are prefixed --warm-* to avoid collision if both stylesheets
+ * ever load together.
+ */
+
+:root {
+  /* ============================================================
+   * COLOR — SURFACE (backgrounds, layers)
+   * ============================================================ */
+  --warm-bg: #FFE9D6;          /* primary cream */
+  --warm-bg-bright: #FFF1E0;   /* lighter wash, hero center */
+  --warm-bg-deep: #F4DEC8;     /* darker wash, edges */
+  --warm-bg-card: #FFEFE0;     /* slightly elevated card surface */
+  --warm-bg-sunken: #F0DBC4;   /* recessed surface */
+
+  /* ============================================================
+   * COLOR — INK (text + foreground)
+   * ============================================================ */
+  --warm-ink: #2A0F08;                          /* primary text — dark brown */
+  --warm-ink-strong: #1A0903;                   /* highest contrast */
+  --warm-ink-soft: #4A1F12;                     /* secondary text */
+  --warm-ink-mute: rgba(42, 15, 8, 0.65);       /* metadata, captions */
+  --warm-ink-faint: rgba(42, 15, 8, 0.4);       /* labels, hairlines text */
+  --warm-ink-ghost: rgba(42, 15, 8, 0.2);       /* disabled, placeholder */
+
+  /* ============================================================
+   * COLOR — ACCENT (coral family — warm dominant)
+   * ============================================================ */
+  --warm-accent: #FF6B3D;        /* primary coral */
+  --warm-accent-deep: #E5754A;   /* warmer secondary */
+  --warm-accent-strong: #B8331A; /* rust — hover/active, CTAs */
+  --warm-accent-soft: #FF9472;   /* lighter coral, hover backgrounds */
+  --warm-accent-tint: #FFDBC9;   /* very light coral, surface tint */
+
+  /* ============================================================
+   * COLOR — QUIET (supporting palette)
+   * ============================================================ */
+  --warm-quiet: #C7644A;         /* terracotta — secondary visuals */
+  --warm-quiet-soft: #E8825F;    /* rose — soft accents */
+
+  /* ============================================================
+   * COLOR — HAIRLINES & BORDERS
+   * ============================================================ */
+  --warm-hair: rgba(42, 15, 8, 0.12);          /* default dividers */
+  --warm-hair-strong: rgba(42, 15, 8, 0.32);   /* eyebrow lines, emphasis */
+  --warm-border: rgba(42, 15, 8, 0.2);         /* card borders */
+  --warm-border-strong: rgba(42, 15, 8, 0.45); /* input/active borders */
+
+  /* ============================================================
+   * SHADOWS — warm-tinted, subtle (no cold grays)
+   * ============================================================ */
+  --warm-shadow-sm: 0 1px 2px rgba(42, 15, 8, 0.06);
+  --warm-shadow-md: 0 4px 14px rgba(42, 15, 8, 0.08);
+  --warm-shadow-lg: 0 16px 48px rgba(42, 15, 8, 0.12);
+  --warm-shadow-xl: 0 32px 80px rgba(42, 15, 8, 0.16);
+
+  /* ============================================================
+   * TYPE — FAMILIES
+   * Single-font system: Plus Jakarta Sans for display + body + UI.
+   * JetBrains Mono kept for true monospace moments only.
+   * ============================================================ */
+  --warm-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --warm-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --warm-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ============================================================
+   * TYPE — SCALE (responsive via clamp where appropriate)
+   * ============================================================ */
+  --warm-text-display: clamp(36px, 6.5vw, 88px);   /* hero wordmark */
+  --warm-text-h1: clamp(40px, 5vw, 72px);          /* case study titles */
+  --warm-text-h2: clamp(28px, 3.5vw, 48px);        /* section headings */
+  --warm-text-h3: clamp(22px, 2.4vw, 32px);        /* subsection */
+  --warm-text-h4: clamp(18px, 1.7vw, 22px);        /* small heading */
+  --warm-text-lead: clamp(19px, 1.5vw, 22px);      /* intro paragraph */
+  --warm-text-body: clamp(16px, 1.1vw, 18px);      /* main body */
+  --warm-text-body-sm: 15px;                        /* small body */
+  --warm-text-caption: 13px;                        /* captions, footnotes */
+  --warm-text-label: 15px;                          /* eyebrow / overline */
+  --warm-text-mono: 14px;                           /* metadata */
+
+  /* ============================================================
+   * TYPE — LINE HEIGHTS
+   * ============================================================ */
+  --warm-leading-tight: 1;
+  --warm-leading-snug: 1.15;
+  --warm-leading-normal: 1.4;
+  --warm-leading-relaxed: 1.65;
+  --warm-leading-loose: 1.85;
+
+  /* ============================================================
+   * TYPE — WEIGHTS
+   * ============================================================ */
+  --warm-weight-light: 300;
+  --warm-weight-regular: 400;
+  --warm-weight-medium: 500;
+  --warm-weight-semi: 600;
+  --warm-weight-bold: 700;
+
+  /* ============================================================
+   * TYPE — TRACKING (letter-spacing)
+   * ============================================================ */
+  --warm-tracking-tight: -0.03em;
+  --warm-tracking-snug: -0.02em;
+  --warm-tracking-normal: -0.01em;
+  --warm-tracking-base: 0;
+  --warm-tracking-wide: 0.04em;
+  --warm-tracking-wider: 0.08em;
+  --warm-tracking-label: 0.12em;
+
+  /* ============================================================
+   * SPACING — 4px base grid
+   * ============================================================ */
+  --warm-space-0: 0;
+  --warm-space-1: 4px;
+  --warm-space-2: 8px;
+  --warm-space-3: 12px;
+  --warm-space-4: 16px;
+  --warm-space-5: 20px;
+  --warm-space-6: 24px;
+  --warm-space-7: 32px;
+  --warm-space-8: 40px;
+  --warm-space-9: 48px;
+  --warm-space-10: 64px;
+  --warm-space-11: 80px;
+  --warm-space-12: 96px;
+  --warm-space-13: 128px;
+  --warm-space-14: 160px;
+  --warm-space-15: 200px;
+
+  /* ============================================================
+   * RADIUS
+   * ============================================================ */
+  --warm-radius-none: 0;
+  --warm-radius-sm: 4px;
+  --warm-radius-md: 12px;
+  --warm-radius-lg: 24px;
+  --warm-radius-xl: 40px;
+  --warm-radius-pill: 999px;
+
+  /* ============================================================
+   * MOTION
+   * ============================================================ */
+  --warm-duration-fast: 150ms;
+  --warm-duration-base: 250ms;
+  --warm-duration-medium: 400ms;
+  --warm-duration-slow: 700ms;
+
+  --warm-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --warm-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --warm-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ============================================================
+   * LAYOUT
+   * ============================================================ */
+  --warm-content-max: 1280px;
+  --warm-content-narrow: 720px;
+  --warm-content-text: 580px;
+  --warm-content-padding: clamp(24px, 4vw, 56px);
+}
+
+/* Warm-system page baseline. Storybook applies fullscreen layout, so this
+   keeps text legible inside any story preview that doesn't paint its own bg. */
+body {
+  background: var(--warm-bg);
+  color: var(--warm-ink);
+  font-family: var(--warm-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

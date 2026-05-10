@@ -80,10 +80,11 @@ export default function ImpactStatusBlock({
       {futureNote && (
         <p
           style={{
-            fontFamily: 'var(--serif)',
+            fontFamily: 'var(--display)',
             fontStyle: 'italic',
+            fontWeight: 400,
             fontSize: 16,
-            lineHeight: 1.55,
+            lineHeight: 1.5,
             color: 'var(--grey-2)',
             margin: 0,
             paddingTop: 16,

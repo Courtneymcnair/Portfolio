@@ -47,11 +47,11 @@ export default function NumberedStep({ number, title, children }: NumberedStepPr
         <h3
           style={{
             flex: 1,
-            fontFamily: 'var(--serif)',
-            fontWeight: 400,
+            fontFamily: 'var(--display)',
+            fontWeight: 500,
             fontSize: 'clamp(24px, 3vw, 34px)',
-            lineHeight: 1.2,
-            letterSpacing: '-0.015em',
+            lineHeight: 1.25,
+            letterSpacing: '-0.005em',
             color: 'var(--ink)',
             margin: 0,
           }}

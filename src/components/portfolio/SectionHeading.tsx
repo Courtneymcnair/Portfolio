@@ -8,11 +8,11 @@ export default function SectionHeading({ children, className = '' }: SectionHead
     <h3
       className={className}
       style={{
-        fontFamily: 'var(--serif)',
-        fontWeight: 400,
+        fontFamily: 'var(--display)',
+        fontWeight: 500,
         fontSize: 'clamp(28px, 3.5vw, 40px)',
-        lineHeight: 1.1,
-        letterSpacing: '-0.02em',
+        lineHeight: 1.15,
+        letterSpacing: '-0.005em',
         color: 'var(--ink)',
       }}
     >

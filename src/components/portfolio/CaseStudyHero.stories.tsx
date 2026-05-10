@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import CaseStudyHero from './CaseStudyHero';
-import HeroComposite from './HeroComposite';
 
 const meta = {
   title: 'Case Study/CaseStudyHero',
@@ -10,26 +9,26 @@ const meta = {
     docs: {
       description: {
         component:
-          'The top of every case study page. Holds partner name + project type meta, large serif title, italic subtitle, optional description paragraph, optional status pill, skill tags, optional external CTA, and an optional visual slot (typically a HeroComposite or Figure). Each element fades in with a small stagger on mount.',
+          'Split case-study hero. Left column: case number + partner mono eyebrow, tinted accent category pill (hugs its content), big serif title, paragraph subtitle, read-time meta, tag chips, large pill CTA. Right column: a product teaser composition (one or two screenshots, with the second floating bottom-right). Stacks below 960px.',
       },
     },
   },
-  argTypes: {
-    statusVariant: { control: { type: 'inline-radio' }, options: ['active', 'shipped', 'planned'] },
-  },
   args: {
+    caseNumber: '01',
     partnerName: 'Chekhub Connect',
-    projectType: 'B2B SaaS · Vendor Portal',
-    title: 'Architecting a two-sided system where clients and their external vendors do business inside the same product.',
-    subtitle:
-      'A net-new bidirectional product spanning the client and vendor sides of a B2B service relationship — dispatch, compliance, execution, and invoicing all flowing through a single shared ticket.',
+    category: 'B2B SaaS · Vendor Portal',
+    title: 'Expanding a mission-critical operations platform into a multi-organization vendor system.',
     description:
-      'Designed end-to-end as the sole product designer, in close collaboration with our lead developer.',
+      '0→1 product connecting dispatch, compliance, execution, and invoicing across organizations. Designed end-to-end as the sole product designer in close partnership with engineering.',
+    readTime: '~8 min read',
     tags: ['0→1', 'System Design', 'B2B SaaS', 'Sole Designer'],
-    statusLabel: 'In active development',
-    statusVariant: 'active',
-    ctaHref: undefined,
-    ctaLabel: 'Go to website ↗',
+    ctaHref: '#story',
+    ctaLabel: 'Read case',
+    images: [
+      { src: '/images/thumbnails/chekhub.png', alt: 'Client surface', caption: 'Client · Dispatch' },
+      { src: '/images/thumbnails/chekhub.png', alt: 'Vendor surface', caption: 'Vendor · Inbox' },
+    ],
+    figLabel: 'Fig.A · System surface',
   },
 } satisfies Meta<typeof CaseStudyHero>;
 
@@ -44,22 +43,18 @@ export const Desktop: Story = { globals: { viewport: desktop } };
 export const Tablet: Story = { globals: { viewport: tablet } };
 export const Mobile: Story = { globals: { viewport: mobile } };
 
-export const WithHeroComposite: Story = {
+export const SingleImage: Story = {
   args: {
-    visual: (
-      <HeroComposite
-        left={{ src: '/images/thumbnails/chekhub.png', alt: 'Client side', label: 'Client' }}
-        right={{ src: '/images/thumbnails/chekhub.png', alt: 'Vendor portal', label: 'Vendor' }}
-        ticketLabel="TICKET #1042"
-      />
-    ),
+    images: [{ src: '/images/thumbnails/chekhub.png', alt: 'Product surface' }],
+    figLabel: undefined,
   },
 };
 
-export const ShippedStatus: Story = {
+export const NoCaptions: Story = {
   args: {
-    statusLabel: 'Shipped',
-    statusVariant: 'shipped',
-    ctaHref: 'https://example.com',
+    images: [
+      { src: '/images/thumbnails/chekhub.png', alt: 'Client surface' },
+      { src: '/images/thumbnails/chekhub.png', alt: 'Vendor surface' },
+    ],
   },
 };

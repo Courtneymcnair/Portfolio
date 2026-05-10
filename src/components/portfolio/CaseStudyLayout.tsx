@@ -66,11 +66,11 @@ export function CaseStudySection({
             {heading && (
               <h2
                 style={{
-                  fontFamily: 'var(--serif)',
-                  fontWeight: 400,
+                  fontFamily: 'var(--display)',
+                  fontWeight: 600,
                   fontSize: 'clamp(32px, 4.5vw, 56px)',
-                  lineHeight: 1.05,
-                  letterSpacing: '-0.02em',
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.01em',
                   color: 'var(--ink)',
                   margin: 0,
                   maxWidth: 880,

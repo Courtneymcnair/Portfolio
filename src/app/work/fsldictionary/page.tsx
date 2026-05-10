@@ -178,8 +178,8 @@ export default function FSLPage() {
             <SectionLabel>DESIGN FOR ACCESSIBILITY</SectionLabel>
             <h2
               style={{
-                fontFamily: 'var(--serif)',
-                fontWeight: 400,
+                fontFamily: 'var(--display)',
+                fontWeight: 500,
                 fontSize: 'clamp(32px, 5vw, 56px)',
                 lineHeight: 1.05,
                 letterSpacing: '-0.02em',

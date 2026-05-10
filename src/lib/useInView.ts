@@ -3,7 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 
 /**
- * Fires once when the element enters the viewport (default: 15% visible, 10% from bottom).
+ * Fires once when the element enters the viewport. Default rootMargin is -15%
+ * on the bottom — reveals trigger slightly before the element fully enters view.
  * Returns [ref, inView]. Disconnects after first intersection.
  */
 export function useInView<T extends HTMLElement = HTMLElement>(
@@ -28,7 +29,7 @@ export function useInView<T extends HTMLElement = HTMLElement>(
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: '0px 0px -10% 0px', ...options },
+      { threshold: 0, rootMargin: '0px 0px -15% 0px', ...options },
     );
 
     observer.observe(el);

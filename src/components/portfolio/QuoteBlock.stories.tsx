@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Pull-quote in Instrument Serif with optional mono attribution beneath. Use for user research quotes, stakeholder feedback, or testimonial moments inside case studies.',
+          'Pull-quote in the display typeface with optional mono attribution beneath. Use for user research quotes, stakeholder feedback, or testimonial moments inside case studies.',
       },
     },
   },

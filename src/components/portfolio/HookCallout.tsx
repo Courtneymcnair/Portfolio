@@ -38,9 +38,11 @@ export default function HookCallout({ label = 'The hook', children }: HookCallou
       </p>
       <p
         style={{
-          fontFamily: 'var(--serif)',
+          fontFamily: 'var(--display)',
+          fontWeight: 500,
           fontSize: 'clamp(18px, 1.8vw, 22px)',
           lineHeight: 1.45,
+          letterSpacing: '-0.01em',
           color: 'var(--ink)',
           margin: 0,
         }}

@@ -113,11 +113,11 @@ export default function SelectWorks() {
         <div>
           <h2
             style={{
-              fontFamily: 'var(--serif)',
-              fontWeight: 400,
+              fontFamily: 'var(--display)',
+              fontWeight: 600,
               fontSize: 'clamp(48px, 7vw, 96px)',
-              lineHeight: 0.95,
-              letterSpacing: '-0.02em',
+              lineHeight: 1.0,
+              letterSpacing: '-0.015em',
               margin: 0,
               color: 'var(--ink)',
             }}
@@ -168,11 +168,11 @@ export default function SelectWorks() {
                 {/* Title */}
                 <h3
                   style={{
-                    fontFamily: 'var(--serif)',
-                    fontWeight: 400,
+                    fontFamily: 'var(--display)',
+                    fontWeight: 500,
                     fontSize: 'clamp(32px, 4vw, 60px)',
-                    lineHeight: 1.0,
-                    letterSpacing: '-0.02em',
+                    lineHeight: 1.08,
+                    letterSpacing: '-0.005em',
                     margin: 0,
                     marginBottom: 26,
                     color: 'var(--ink)',
@@ -209,9 +209,10 @@ export default function SelectWorks() {
                 {/* Brief */}
                 <p
                   style={{
-                    fontFamily: 'var(--serif)',
-                    fontSize: 19,
-                    lineHeight: 1.5,
+                    fontFamily: 'var(--sans)',
+                    fontWeight: 400,
+                    fontSize: 17,
+                    lineHeight: 1.55,
                     color: 'var(--grey-1)',
                     margin: 0,
                     maxWidth: 460,

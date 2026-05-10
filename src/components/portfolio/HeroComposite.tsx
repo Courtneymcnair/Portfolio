@@ -17,7 +17,7 @@ interface HeroCompositeProps {
   accent?: string;
 }
 
-const easeOut = [0.2, 0.8, 0.2, 1] as const;
+const easeOut = [0.22, 1, 0.36, 1] as const;
 
 export default function HeroComposite({
   left,

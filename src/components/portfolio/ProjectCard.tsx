@@ -41,11 +41,11 @@ export default function ProjectCard({ title, href, imageSrc, imageAlt }: Project
       </div>
       <p
         style={{
-          fontFamily: 'var(--serif)',
-          fontWeight: 400,
+          fontFamily: 'var(--display)',
+          fontWeight: 500,
           fontSize: 'clamp(20px, 2vw, 26px)',
           lineHeight: 1.3,
-          letterSpacing: '-0.01em',
+          letterSpacing: 0,
           color: 'var(--ink)',
           textAlign: 'center',
           margin: 0,

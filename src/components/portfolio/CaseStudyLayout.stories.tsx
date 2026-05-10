@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/nextjs-vite';
 import { Brain, Sparkles, GitBranch, Megaphone } from 'lucide-react';
 import CaseStudyLayout, { CaseStudySection } from './CaseStudyLayout';
 import CaseStudyHero from './CaseStudyHero';
-import HeroComposite from './HeroComposite';
 import HookCallout from './HookCallout';
 import IconCardGrid from './IconCardGrid';
 import NumberedStep from './NumberedStep';
@@ -57,21 +56,20 @@ function FullVendorPortalDemo() {
   return (
     <>
       <CaseStudyHero
+        caseNumber="01"
         partnerName="Chekhub Connect"
-        projectType="B2B SaaS · Vendor Portal"
-        title="Architecting a two-sided system where clients and their external vendors do business inside the same product."
-        subtitle="A net-new bidirectional product spanning the client and vendor sides of a B2B service relationship — dispatch, compliance, execution, and invoicing all flowing through a single shared ticket."
-        description="Designed end-to-end as the sole product designer, in close collaboration with our lead developer."
+        category="B2B SaaS · Vendor Portal"
+        title="Expanding a mission-critical operations platform into a multi-organization vendor system."
+        description="0→1 product connecting dispatch, compliance, execution, and invoicing across organizations. Designed end-to-end as the sole product designer in close partnership with engineering."
+        readTime="~8 min read"
         tags={['0→1', 'System Design', 'B2B SaaS', 'Sole Designer']}
-        statusLabel="In active development"
-        statusVariant="active"
-        visual={
-          <HeroComposite
-            left={{ src: '/images/thumbnails/chekhub.png', alt: 'Client side', label: 'Client' }}
-            right={{ src: '/images/thumbnails/chekhub.png', alt: 'Vendor portal', label: 'Vendor' }}
-            ticketLabel="TICKET #1042"
-          />
-        }
+        ctaHref="#hook"
+        ctaLabel="Read case"
+        images={[
+          { src: '/images/thumbnails/chekhub.png', alt: 'Client surface', caption: 'Client · Dispatch' },
+          { src: '/images/thumbnails/chekhub.png', alt: 'Vendor surface', caption: 'Vendor · Inbox' },
+        ]}
+        figLabel="Fig.A · System surface"
       />
 
       <CaseStudySection eyebrow="The hook" topRule>

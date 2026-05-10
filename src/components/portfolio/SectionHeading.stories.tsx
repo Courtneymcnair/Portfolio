@@ -10,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Instrument Serif H3 used as the primary section title inside case studies. Fluid sizing: clamp(28px, 3.5vw, 40px). Pair with SectionLabel above.',
+          'Display H3 used as the primary section title inside case studies. Fluid sizing: clamp(28px, 3.5vw, 40px). Pair with SectionLabel above.',
       },
     },
   },

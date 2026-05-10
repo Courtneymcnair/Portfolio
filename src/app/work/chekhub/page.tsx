@@ -117,8 +117,8 @@ export default function ChekhubPage() {
             <SectionLabel>SOLE PRODUCT DESIGNER</SectionLabel>
             <h2
               style={{
-                fontFamily: 'var(--serif)',
-                fontWeight: 400,
+                fontFamily: 'var(--display)',
+                fontWeight: 500,
                 fontSize: 'clamp(32px, 5vw, 56px)',
                 lineHeight: 1.05,
                 letterSpacing: '-0.02em',
@@ -343,8 +343,8 @@ export default function ChekhubPage() {
         >
           <p
             style={{
-              fontFamily: 'var(--serif)',
-              fontWeight: 400,
+              fontFamily: 'var(--display)',
+              fontWeight: 500,
               fontSize: 'clamp(20px, 2.5vw, 26px)',
               lineHeight: 1.4,
               color: 'var(--ink)',
@@ -441,8 +441,8 @@ export default function ChekhubPage() {
               <CalloutCard label="IMPACT">
                 <p
                   style={{
-                    fontFamily: 'var(--serif)',
-                    fontWeight: 400,
+                    fontFamily: 'var(--display)',
+                    fontWeight: 500,
                     fontSize: 'clamp(20px, 2.5vw, 26px)',
                     lineHeight: 1.3,
                     color: 'var(--ink)',
@@ -539,8 +539,8 @@ export default function ChekhubPage() {
               <CalloutCard label="CLIENT FEEDBACK">
                 <p
                   style={{
-                    fontFamily: 'var(--serif)',
-                    fontWeight: 400,
+                    fontFamily: 'var(--display)',
+                    fontWeight: 500,
                     fontSize: 'clamp(20px, 2.5vw, 26px)',
                     lineHeight: 1.3,
                     color: 'var(--ink)',
@@ -630,8 +630,8 @@ export default function ChekhubPage() {
               <CalloutCard label="IMPACT">
                 <p
                   style={{
-                    fontFamily: 'var(--serif)',
-                    fontWeight: 400,
+                    fontFamily: 'var(--display)',
+                    fontWeight: 500,
                     fontSize: 'clamp(20px, 2.5vw, 26px)',
                     lineHeight: 1.3,
                     color: 'var(--ink)',

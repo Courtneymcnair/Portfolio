@@ -209,14 +209,14 @@ export default function HeroFieldOfDots() {
             onMouseLeave={() => setHoverName(false)}
             style={{
               display: 'block',
-              fontFamily: 'var(--serif)',
-              fontWeight: 400,
+              fontFamily: 'var(--display)',
+              fontWeight: 600,
               fontStyle: 'normal',
               fontSize: 'clamp(56px, 13vw, 184px)',
-              lineHeight: 0.92,
-              letterSpacing: hoverName ? '0.02em' : '-0.025em',
+              lineHeight: 0.95,
+              letterSpacing: hoverName ? '0.02em' : '-0.015em',
               color: hoverName ? 'var(--accent)' : 'var(--ink)',
-              transition: 'letter-spacing 0.6s cubic-bezier(0.2,0.8,0.2,1), color 0.4s',
+              transition: 'letter-spacing 0.6s cubic-bezier(0.22,1,0.36,1), color 0.4s',
             }}
           >
             Courtney
@@ -224,12 +224,12 @@ export default function HeroFieldOfDots() {
           <span
             style={{
               display: 'block',
-              fontFamily: 'var(--serif)',
-              fontWeight: 400,
+              fontFamily: 'var(--display)',
+              fontWeight: 500,
               fontStyle: 'italic',
               fontSize: 'clamp(56px, 13vw, 184px)',
-              lineHeight: 0.92,
-              letterSpacing: '-0.025em',
+              lineHeight: 0.95,
+              letterSpacing: '-0.01em',
               color: 'var(--ink)',
               marginTop: -10,
             }}
@@ -241,13 +241,13 @@ export default function HeroFieldOfDots() {
         {/* Tagline */}
         <p
           style={{
-            fontFamily: 'var(--serif)',
-            fontStyle: 'italic',
-            fontSize: 'clamp(24px, 2vw, 30px)',
-            lineHeight: 1.4,
+            fontFamily: 'var(--sans)',
+            fontWeight: 400,
+            fontSize: 'clamp(20px, 1.6vw, 24px)',
+            lineHeight: 1.5,
             color: 'var(--grey-1)',
             marginTop: 36,
-            maxWidth: 880,
+            maxWidth: 760,
             margin: '36px auto 0',
             whiteSpace: 'normal',
           }}

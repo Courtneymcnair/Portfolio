@@ -28,8 +28,9 @@ export default function Aside({ label = 'Why this matters', children }: AsidePro
       </p>
       <p
         style={{
-          fontFamily: 'var(--serif)',
+          fontFamily: 'var(--display)',
           fontStyle: 'italic',
+          fontWeight: 400,
           fontSize: 18,
           lineHeight: 1.5,
           color: 'var(--grey-1)',

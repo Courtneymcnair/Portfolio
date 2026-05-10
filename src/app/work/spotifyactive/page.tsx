@@ -233,8 +233,8 @@ export default function SpotifyActivePage() {
             <SectionLabel>PRODUCT DESIGN &middot; CONCEPT</SectionLabel>
             <h2
               style={{
-                fontFamily: 'var(--serif)',
-                fontWeight: 400,
+                fontFamily: 'var(--display)',
+                fontWeight: 500,
                 fontSize: 'clamp(32px, 5vw, 56px)',
                 lineHeight: 1.05,
                 letterSpacing: '-0.02em',
@@ -447,8 +447,8 @@ export default function SpotifyActivePage() {
                 <div key={s.stat}>
                   <p
                     style={{
-                      fontFamily: 'var(--serif)',
-                      fontWeight: 400,
+                      fontFamily: 'var(--display)',
+                      fontWeight: 500,
                       fontSize: 'clamp(48px, 5vw, 64px)',
                       lineHeight: 1,
                       color: 'var(--ink)',
@@ -494,8 +494,8 @@ export default function SpotifyActivePage() {
         <div className="content-width" style={{ paddingTop: 56, paddingBottom: 56 }}>
           <p
             style={{
-              fontFamily: 'var(--serif)',
-              fontWeight: 400,
+              fontFamily: 'var(--display)',
+              fontWeight: 500,
               fontSize: 'clamp(22px, 3vw, 30px)',
               lineHeight: 1.4,
               color: 'var(--ink)',
@@ -539,9 +539,9 @@ export default function SpotifyActivePage() {
                 </p>
                 <p
                   style={{
-                    fontFamily: 'var(--serif)',
+                    fontFamily: 'var(--display)',
                     fontStyle: 'italic',
-                    fontSize: 16,
+                    fontSize: 17,
                     lineHeight: 1.5,
                     color: 'var(--ink)',
                   }}
