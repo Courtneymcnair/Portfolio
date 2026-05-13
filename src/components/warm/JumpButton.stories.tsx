@@ -1,21 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import MetaGrid from "./MetaGrid";
+import JumpButton from "./JumpButton";
 
-const meta: Meta<typeof MetaGrid> = {
-  title: "Warm/MetaGrid",
-  component: MetaGrid,
+const meta: Meta<typeof JumpButton> = {
+  title: "Warm/JumpButton",
+  component: JumpButton,
   parameters: { layout: "padded" },
 };
 
 export default meta;
-type Story = StoryObj<typeof MetaGrid>;
-
-const ITEMS = [
-  { label: "Role", value: "Lead product designer" },
-  { label: "Team", value: "Solo design, 4 engineers" },
-  { label: "Platform", value: "Web — desktop first" },
-  { label: "Sector", value: "B2B SaaS operations" },
-];
+type Story = StoryObj<typeof JumpButton>;
 
 const wrap: React.CSSProperties = {
   padding: "64px var(--warm-content-padding)",
@@ -25,7 +18,15 @@ const wrap: React.CSSProperties = {
 export const Default: Story = {
   render: () => (
     <div style={wrap}>
-      <MetaGrid items={ITEMS} />
+      <JumpButton href="#final-design" />
+    </div>
+  ),
+};
+
+export const CustomLabel: Story = {
+  render: () => (
+    <div style={wrap}>
+      <JumpButton href="#impact" label="Skip to impact" />
     </div>
   ),
 };
@@ -34,7 +35,7 @@ export const Desktop: Story = {
   globals: { viewport: { value: "desktop", isRotated: false } },
   render: () => (
     <div style={wrap}>
-      <MetaGrid items={ITEMS} />
+      <JumpButton href="#final-design" />
     </div>
   ),
 };
@@ -43,7 +44,7 @@ export const Tablet: Story = {
   globals: { viewport: { value: "tablet", isRotated: false } },
   render: () => (
     <div style={wrap}>
-      <MetaGrid items={ITEMS} />
+      <JumpButton href="#final-design" />
     </div>
   ),
 };
@@ -51,8 +52,8 @@ export const Tablet: Story = {
 export const Mobile: Story = {
   globals: { viewport: { value: "mobile", isRotated: false } },
   render: () => (
-    <div style={{ ...wrap, padding: "48px var(--warm-content-padding)" }}>
-      <MetaGrid items={ITEMS} />
+    <div style={wrap}>
+      <JumpButton href="#final-design" />
     </div>
   ),
 };

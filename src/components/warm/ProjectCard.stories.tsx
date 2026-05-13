@@ -10,7 +10,10 @@ const meta: Meta<typeof ProjectCard> = {
 export default meta;
 type Story = StoryObj<typeof ProjectCard>;
 
-const wrap: React.CSSProperties = { padding: "64px 56px", background: "#FFE9D6" };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--warm-content-padding)",
+  background: "#FFE9D6",
+};
 
 const CARDS = [
   { title: "Vendor portal", placeholderColor: "#FFDBC9" },
@@ -85,7 +88,7 @@ export const Tablet: Story = {
 export const Mobile: Story = {
   globals: { viewport: { value: "mobile", isRotated: false } },
   render: () => (
-    <div style={{ ...wrap, padding: "48px 24px" }}>
+    <div style={{ ...wrap, padding: "48px var(--warm-content-padding)" }}>
       <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
         {CARDS.map((c) => (
           <ProjectCard key={c.title} {...c} />

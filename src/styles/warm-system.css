@@ -160,7 +160,15 @@
   --warm-content-max: 1280px;
   --warm-content-narrow: 720px;
   --warm-content-text: 580px;
-  --warm-content-padding: clamp(24px, 4vw, 56px);
+
+  /* Standard horizontal page gutter — applied to every section wrapper so
+   * left/right margins stay consistent across the site.
+   *   mobile  (≤375px):  24px
+   *   tablet  (768px):   ~38px
+   *   desktop (≥1120px): 56px
+   * Use `padding-inline: var(--warm-content-padding)` on any full-width
+   * section to opt into the system. Vertical padding is per-section. */
+  --warm-content-padding: clamp(24px, 5vw, 56px);
 }
 
 /* Warm-system page baseline. Storybook applies fullscreen layout, so this

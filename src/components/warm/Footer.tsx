@@ -25,7 +25,7 @@ export default function Footer({
   return (
     <footer
       style={{
-        padding: "clamp(48px, 6vw, 96px) clamp(24px, 4vw, 56px)",
+        padding: "clamp(48px, 6vw, 96px) var(--warm-content-padding)",
         background: "var(--warm-bg, #FFE9D6)",
         borderTop: "1px solid var(--warm-hair, rgba(42, 15, 8, 0.12))",
         color: "var(--warm-ink, #2A0F08)",

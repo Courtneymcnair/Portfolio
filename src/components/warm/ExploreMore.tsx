@@ -22,7 +22,7 @@ export default function ExploreMore({
   return (
     <section
       style={{
-        padding: "clamp(64px, 8vw, 128px) clamp(24px, 4vw, 56px)",
+        padding: "clamp(64px, 8vw, 128px) var(--warm-content-padding)",
         background: "var(--warm-bg, #FFE9D6)",
         borderTop: "1px solid var(--warm-hair, rgba(42, 15, 8, 0.12))",
         textAlign: "center",

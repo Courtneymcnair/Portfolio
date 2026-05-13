@@ -11,7 +11,7 @@ export default meta;
 type Story = StoryObj<typeof SectionLabel>;
 
 const wrap: React.CSSProperties = {
-  padding: "64px 56px",
+  padding: "64px var(--warm-content-padding)",
   background: "#FFE9D6",
   display: "flex",
   flexDirection: "column",
@@ -51,7 +51,7 @@ export const Tablet: Story = {
 export const Mobile: Story = {
   globals: { viewport: { value: "mobile", isRotated: false } },
   render: () => (
-    <div style={{ ...wrap, padding: "48px 24px" }}>
+    <div style={{ ...wrap, padding: "48px var(--warm-content-padding)" }}>
       <SectionLabel>The challenge</SectionLabel>
       <SectionLabel withLines>Product designer</SectionLabel>
     </div>

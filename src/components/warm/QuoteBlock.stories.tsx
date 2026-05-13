@@ -10,7 +10,10 @@ const meta: Meta<typeof QuoteBlock> = {
 export default meta;
 type Story = StoryObj<typeof QuoteBlock>;
 
-const wrap: React.CSSProperties = { padding: "64px 56px", background: "#FFE9D6" };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--warm-content-padding)",
+  background: "#FFE9D6",
+};
 
 const SAMPLE = {
   quote:
@@ -48,7 +51,7 @@ export const Tablet: Story = {
 export const Mobile: Story = {
   globals: { viewport: { value: "mobile", isRotated: false } },
   render: () => (
-    <div style={{ ...wrap, padding: "48px 24px" }}>
+    <div style={{ ...wrap, padding: "48px var(--warm-content-padding)" }}>
       <QuoteBlock quote={SAMPLE.quote} attribution={SAMPLE.attribution} role={SAMPLE.role} />
     </div>
   ),
