@@ -41,10 +41,10 @@ export default function HeroCursive() {
       >
         <text
           x="50%"
-          y="72%"
+          y="68%"
           textAnchor="middle"
-          fontFamily="'Great Vibes', cursive"
-          fontSize="340"
+          fontFamily="'Pacifico', cursive"
+          fontSize="240"
           fontWeight={400}
           className="cursive-draw"
         >

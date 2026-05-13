@@ -283,11 +283,11 @@ body {
 .cursive-draw {
   fill: transparent;
   stroke: #FFFFFF;
-  stroke-width: 2.2;
+  stroke-width: 3;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 3200;
-  stroke-dashoffset: 3200;
+  stroke-dasharray: 3600;
+  stroke-dashoffset: 3600;
   animation:
     cursive-draw 2.8s cubic-bezier(0.65, 0, 0.35, 1) forwards,
     cursive-fill 900ms ease-out 2.5s forwards;
