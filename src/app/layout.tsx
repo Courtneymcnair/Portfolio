@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import Navbar from '@/components/portfolio/Navbar';
+import '@/styles/warm-system.css';
+import Navbar from '@/components/warm/Navbar';
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
 

@@ -1,11 +1,11 @@
-import HeroFieldOfDots from '@/components/portfolio/HeroFieldOfDots';
-import SelectWorks from '@/components/portfolio/SelectWorks';
-import Footer from '@/components/portfolio/Footer';
+import Hero from '@/components/warm/Hero';
+import SelectWorks from '@/components/warm/SelectWorks';
+import Footer from '@/components/warm/Footer';
 
 export default function HomePage() {
   return (
     <>
-      <HeroFieldOfDots />
+      <Hero />
       <SelectWorks />
       <Footer />
     </>
