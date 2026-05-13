@@ -1,11 +1,11 @@
-import HeroFieldOfDots from '@/components/portfolio/HeroFieldOfDots';
+import HeroCursive from '@/components/portfolio/HeroCursive';
 import SelectWorks from '@/components/portfolio/SelectWorks';
 import Footer from '@/components/portfolio/Footer';
 
 export default function HomePage() {
   return (
     <>
-      <HeroFieldOfDots />
+      <HeroCursive />
       <SelectWorks />
       <Footer />
     </>

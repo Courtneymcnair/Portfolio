@@ -278,6 +278,56 @@ body {
   }
 }
 
+/* ─── Hero cursive write-on animation ─────────────────────────────────── */
+
+.cursive-draw {
+  fill: transparent;
+  stroke: #FFFFFF;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 3200;
+  stroke-dashoffset: 3200;
+  animation:
+    cursive-draw 2.8s cubic-bezier(0.65, 0, 0.35, 1) forwards,
+    cursive-fill 900ms ease-out 2.5s forwards;
+}
+
+@keyframes cursive-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes cursive-fill {
+  to { fill: #FFFFFF; }
+}
+
+.cursive-tagline {
+  margin-top: 24px;
+  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--sans);
+  font-size: clamp(14px, 1.2vw, 18px);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: cursive-fade 900ms ease-out 3.1s forwards;
+}
+
+@keyframes cursive-fade {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursive-draw {
+    stroke-dashoffset: 0;
+    fill: #FFFFFF;
+    animation: none;
+  }
+  .cursive-tagline {
+    opacity: 1;
+    animation: none;
+  }
+}
+
 /* ─── IconCardGrid responsive grid ────────────────────────────────────── */
 
 .icon-card-grid {
