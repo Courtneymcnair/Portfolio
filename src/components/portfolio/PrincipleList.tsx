@@ -28,7 +28,7 @@ export default function PrincipleList({ items }: Props) {
           key={i}
           style={{
             paddingLeft: 18,
-            borderLeft: "2px solid var(--hair-color, rgba(42,15,8,0.12))",
+            borderLeft: "2px solid var(--hair-color, rgba(10, 10, 15, 0.12))",
           }}
         >
           <p
@@ -82,7 +82,7 @@ export default function PrincipleList({ items }: Props) {
                       top: "0.7em",
                       width: 6,
                       height: 1,
-                      background: "var(--ink-faint, rgba(42,15,8,0.4))",
+                      background: "var(--ink-faint, rgba(10, 10, 15, 0.4))",
                     }}
                   />
                   {sub}

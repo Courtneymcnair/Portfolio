@@ -19,12 +19,12 @@ export default function UserGroupCard({ icon: Icon, name, sections }: Props) {
     <div
       style={{
         background: "var(--accent-tint, #E5E9FF)",
-        borderRadius: "var(--warm-radius-md, 12px)",
+        borderRadius: "var(--r-md, 12px)",
         padding: "32px 24px",
         display: "flex",
         flexDirection: "column",
         gap: 20,
-        border: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
+        border: "1px solid var(--hair-color, rgba(10, 10, 15, 0.12))",
       }}
     >
       <div
@@ -34,7 +34,7 @@ export default function UserGroupCard({ icon: Icon, name, sections }: Props) {
           margin: "0 auto",
           borderRadius: "50%",
           background: "var(--paper-card, #FFFFFF)",
-          border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
+          border: "1px solid var(--border-color, rgba(10, 10, 15, 0.2))",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

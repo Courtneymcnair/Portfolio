@@ -27,16 +27,16 @@ export default function ProjectCard({
         textDecoration: "none",
         color: "inherit",
         cursor: href ? "pointer" : "default",
-        transition: "transform var(--warm-duration-medium, 400ms) var(--warm-ease-out, cubic-bezier(0.22,1,0.36,1))",
+        transition: "transform var(--dur-reveal, 400ms) var(--ease-out, cubic-bezier(0.22,1,0.36,1))",
       }}
     >
       <div
         style={{
           aspectRatio: "4 / 3",
           background: placeholderColor,
-          borderRadius: "var(--warm-radius-md, 12px)",
+          borderRadius: "var(--r-md, 12px)",
           overflow: "hidden",
-          border: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
+          border: "1px solid var(--hair-color, rgba(10, 10, 15, 0.12))",
           position: "relative",
         }}
       >

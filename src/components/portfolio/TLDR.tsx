@@ -10,12 +10,12 @@ export default function TLDR({ label = "TL;DR", children }: Props) {
     <aside
       style={{
         background: "var(--paper-card, #FFFFFF)",
-        border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
-        borderRadius: "var(--warm-radius-md, 12px)",
+        border: "1px solid var(--border-color, rgba(10, 10, 15, 0.2))",
+        borderRadius: "var(--r-md, 12px)",
         padding: "clamp(20px, 3vw, 32px)",
         maxWidth: 880,
         margin: "0 auto",
-        boxShadow: "var(--shadow-1, 0 1px 2px rgba(42,15,8,0.06))",
+        boxShadow: "var(--shadow-1, 0 1px 2px rgba(10, 10, 15, 0.06))",
       }}
     >
       <p

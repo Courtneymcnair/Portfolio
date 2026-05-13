@@ -34,7 +34,7 @@ export default function SectionLabel({ children, withLines = false, align = "lef
           style={{
             flex: "0 1 120px",
             height: 1,
-            background: "var(--hair-strong, rgba(42,15,8,0.32))",
+            background: "var(--hair-strong, rgba(10, 10, 15, 0.32))",
           }}
         />
         <span style={textStyle}>{children}</span>
@@ -43,7 +43,7 @@ export default function SectionLabel({ children, withLines = false, align = "lef
           style={{
             flex: "0 1 120px",
             height: 1,
-            background: "var(--hair-strong, rgba(42,15,8,0.32))",
+            background: "var(--hair-strong, rgba(10, 10, 15, 0.32))",
           }}
         />
       </div>

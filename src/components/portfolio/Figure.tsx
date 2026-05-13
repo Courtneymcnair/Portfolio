@@ -79,16 +79,16 @@ export default function Figure({
             position: "relative",
             width: "100%",
             aspectRatio: aspect,
-            borderRadius: "var(--warm-radius-md, 12px)",
+            borderRadius: "var(--r-md, 12px)",
             overflow: "hidden",
             background: "var(--grey-5, #ECECE6)",
-            border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
+            border: "1px solid var(--border-color, rgba(10, 10, 15, 0.2))",
             cursor: interactive ? "zoom-in" : undefined,
             transition: "box-shadow 300ms ease, transform 300ms ease",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.boxShadow =
-              "var(--shadow-3, 0 16px 48px rgba(42,15,8,0.12))";
+              "var(--shadow-3, 0 16px 48px rgba(10, 10, 15, 0.12))";
             e.currentTarget.style.transform = "translateY(-2px)";
           }}
           onMouseLeave={(e) => {
@@ -113,7 +113,7 @@ export default function Figure({
               fontSize: 13,
               fontWeight: 500,
               letterSpacing: "0.04em",
-              color: "var(--grey-2, rgba(42,15,8,0.65))",
+              color: "var(--grey-2, rgba(10, 10, 15, 0.65))",
               textAlign: "center",
             }}
           >
@@ -158,7 +158,7 @@ function Lightbox({
         position: "fixed",
         inset: 0,
         zIndex: 9999,
-        background: "rgba(26, 9, 3, 0.82)",
+        background: "rgba(10, 10, 15, 0.82)",
         backdropFilter: "blur(4px)",
         WebkitBackdropFilter: "blur(4px)",
         display: "flex",
@@ -181,7 +181,7 @@ function Lightbox({
           height: 44,
           border: "none",
           borderRadius: "50%",
-          background: "rgba(255, 233, 214, 0.12)",
+          background: "rgba(244, 244, 240, 0.12)",
           color: "#F4F4F0",
           cursor: "pointer",
           display: "flex",
@@ -190,10 +190,10 @@ function Lightbox({
           transition: "background 150ms ease",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.background = "rgba(255, 233, 214, 0.22)";
+          e.currentTarget.style.background = "rgba(244, 244, 240, 0.22)";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.background = "rgba(255, 233, 214, 0.12)";
+          e.currentTarget.style.background = "rgba(244, 244, 240, 0.12)";
         }}
       >
         <X size={22} strokeWidth={1.75} />
@@ -217,7 +217,7 @@ function Lightbox({
             position: "relative",
             maxWidth: "100%",
             maxHeight: caption ? "82vh" : "88vh",
-            borderRadius: "var(--warm-radius-md, 12px)",
+            borderRadius: "var(--r-md, 12px)",
             overflow: "hidden",
             boxShadow: "0 32px 80px rgba(0, 0, 0, 0.5)",
           }}
@@ -248,7 +248,7 @@ function Lightbox({
               fontSize: 14,
               fontWeight: 500,
               letterSpacing: "0.04em",
-              color: "rgba(255, 233, 214, 0.78)",
+              color: "rgba(244, 244, 240, 0.78)",
               textAlign: "center",
               maxWidth: 720,
             }}

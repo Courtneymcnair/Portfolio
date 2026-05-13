@@ -77,7 +77,7 @@ export default function CaseStudyHero({
             >
               {caseNumber && <span>Case {caseNumber}</span>}
               {caseNumber && partnerName && (
-                <span style={{ color: "var(--grey-2, rgba(42,15,8,0.65))" }}>
+                <span style={{ color: "var(--grey-2, rgba(10, 10, 15, 0.65))" }}>
                   {" "}
                   /{" "}
                 </span>
@@ -138,7 +138,7 @@ export default function CaseStudyHero({
                 fontWeight: 600,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                color: "var(--grey-2, rgba(42,15,8,0.65))",
+                color: "var(--grey-2, rgba(10, 10, 15, 0.65))",
                 marginBottom: 20,
               }}
             >
@@ -164,7 +164,7 @@ export default function CaseStudyHero({
                   style={{
                     display: "inline-block",
                     padding: "6px 12px",
-                    borderRadius: "var(--warm-radius-pill, 999px)",
+                    borderRadius: "var(--r-pill, 999px)",
                     background: "var(--grey-5, #ECECE6)",
                     fontFamily:
                       "var(--display, 'Plus Jakarta Sans', sans-serif)",
@@ -245,11 +245,11 @@ function StackedHeroImage({ image }: { image: HeroImage }) {
         width: "100%",
         aspectRatio: "16 / 9",
         margin: 0,
-        borderRadius: "var(--warm-radius-md, 12px)",
+        borderRadius: "var(--r-md, 12px)",
         overflow: "hidden",
         background: "var(--paper-card, #FFFFFF)",
-        border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
-        boxShadow: "var(--shadow-3, 0 16px 48px rgba(42,15,8,0.12))",
+        border: "1px solid var(--border-color, rgba(10, 10, 15, 0.2))",
+        boxShadow: "var(--shadow-3, 0 16px 48px rgba(10, 10, 15, 0.12))",
       }}
     >
       <Image
@@ -291,7 +291,7 @@ function ProductTeaser({
             fontWeight: 600,
             letterSpacing: "0.18em",
             textTransform: "uppercase",
-            color: "var(--grey-2, rgba(42,15,8,0.65))",
+            color: "var(--grey-2, rgba(10, 10, 15, 0.65))",
             zIndex: 3,
           }}
         >
@@ -318,12 +318,12 @@ function ProductTeaser({
             width: secondary ? "94%" : "100%",
             aspectRatio: "4 / 3",
             margin: 0,
-            borderRadius: "var(--warm-radius-md, 12px)",
+            borderRadius: "var(--r-md, 12px)",
             overflow: "hidden",
             background: "var(--paper-card, #FFFFFF)",
-            border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
+            border: "1px solid var(--border-color, rgba(10, 10, 15, 0.2))",
             boxShadow:
-              "var(--shadow-3, 0 16px 48px rgba(42,15,8,0.12))",
+              "var(--shadow-3, 0 16px 48px rgba(10, 10, 15, 0.12))",
             transform: secondary ? "translate(-4%, -8%)" : "none",
             zIndex: 2,
           }}
@@ -350,12 +350,12 @@ function ProductTeaser({
               width: "60%",
               aspectRatio: "4 / 3",
               margin: 0,
-              borderRadius: "var(--warm-radius-md, 12px)",
+              borderRadius: "var(--r-md, 12px)",
               overflow: "hidden",
               background: "var(--paper-card, #FFFFFF)",
-              border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
+              border: "1px solid var(--border-color, rgba(10, 10, 15, 0.2))",
               boxShadow:
-                "var(--shadow-4, 0 32px 80px rgba(42,15,8,0.16))",
+                "var(--shadow-4, 0 32px 80px rgba(10, 10, 15, 0.16))",
               zIndex: 1,
             }}
           >
@@ -385,7 +385,7 @@ function TeaserCaption({ children }: { children: React.ReactNode }) {
         left: 0,
         right: 0,
         padding: "8px 12px",
-        background: "rgba(26, 9, 3, 0.6)",
+        background: "rgba(10, 10, 15, 0.6)",
         color: "var(--paper, #F4F4F0)",
         fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
         fontSize: 11,

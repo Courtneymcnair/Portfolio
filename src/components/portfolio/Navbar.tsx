@@ -107,7 +107,7 @@ export default function Navbar({
           alignItems: "center",
           justifyContent: "space-between",
           padding: "clamp(10px, 2.2vw, 20px) var(--content-padding)",
-          background: "rgba(255, 233, 214, 0.78)",
+          background: "rgba(244, 244, 240, 0.78)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
           borderBottom: "1px solid var(--hair-color, rgba(10, 10, 15, 0.08))",
@@ -172,7 +172,7 @@ export default function Navbar({
                       borderBottom: isActive
                         ? "1px solid var(--ink, #0A0A0F)"
                         : "1px solid transparent",
-                      transition: "border-color var(--warm-duration-base, 250ms)",
+                      transition: "border-color var(--dur-small, 250ms)",
                     }}
                   >
                     {link.label}
@@ -211,7 +211,7 @@ export default function Navbar({
             padding: 0,
             color: "var(--ink, #0A0A0F)",
             cursor: "pointer",
-            transition: "opacity var(--warm-duration-base, 250ms)",
+            transition: "opacity var(--dur-small, 250ms)",
           }}
         >
           <Hamburger open={menuOpen} />
@@ -232,10 +232,10 @@ export default function Navbar({
               flexDirection: "column",
               gap: 4,
               padding: "16px var(--content-padding) 28px",
-              background: "rgba(255, 233, 214, 0.96)",
+              background: "rgba(244, 244, 240, 0.96)",
               backdropFilter: "blur(16px)",
               WebkitBackdropFilter: "blur(16px)",
-              borderBottom: "1px solid var(--hair-strong, rgba(42,15,8,0.32))",
+              borderBottom: "1px solid var(--hair-strong, rgba(10, 10, 15, 0.32))",
               animation: "warm-nav-slide 280ms cubic-bezier(0.22, 1, 0.36, 1)",
             }}
           >
@@ -261,7 +261,7 @@ export default function Navbar({
                     color: "var(--ink, #0A0A0F)",
                     textDecoration: "none",
                     padding: "14px 0",
-                    borderBottom: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
+                    borderBottom: "1px solid var(--hair-color, rgba(10, 10, 15, 0.12))",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
@@ -277,7 +277,7 @@ export default function Navbar({
                   >
                     {link.label}
                   </span>
-                  <span aria-hidden style={{ color: "var(--grey-2, rgba(42,15,8,0.65))", fontSize: 18 }}>
+                  <span aria-hidden style={{ color: "var(--grey-2, rgba(10, 10, 15, 0.65))", fontSize: 18 }}>
                     →
                   </span>
                 </a>

@@ -28,8 +28,8 @@ const variantColors: Record<
   },
   planned: {
     bg: "var(--grey-5, #ECECE6)",
-    text: "var(--grey-2, rgba(42,15,8,0.65))",
-    dot: "var(--grey-2, rgba(42,15,8,0.65))",
+    text: "var(--grey-2, rgba(10, 10, 15, 0.65))",
+    dot: "var(--grey-2, rgba(10, 10, 15, 0.65))",
   },
 };
 
@@ -61,7 +61,7 @@ export default function ImpactStatusBlock({
           alignItems: "center",
           gap: 8,
           padding: "6px 14px",
-          borderRadius: "var(--warm-radius-pill, 999px)",
+          borderRadius: "var(--r-pill, 999px)",
           background: colors.bg,
           color: colors.text,
           fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
@@ -103,10 +103,10 @@ export default function ImpactStatusBlock({
             fontWeight: 400,
             fontSize: 16,
             lineHeight: 1.55,
-            color: "var(--grey-2, rgba(42,15,8,0.65))",
+            color: "var(--grey-2, rgba(10, 10, 15, 0.65))",
             margin: 0,
             paddingTop: 16,
-            borderTop: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
+            borderTop: "1px solid var(--hair-color, rgba(10, 10, 15, 0.12))",
           }}
         >
           {futureNote}
@@ -127,10 +127,10 @@ function StatusColumn({
 }) {
   const labelColor = accent
     ? "var(--accent, #3250FF)"
-    : "var(--grey-2, rgba(42,15,8,0.65))";
+    : "var(--grey-2, rgba(10, 10, 15, 0.65))";
   const dashColor = accent
     ? "var(--accent, #3250FF)"
-    : "var(--ink-faint, rgba(42,15,8,0.4))";
+    : "var(--ink-faint, rgba(10, 10, 15, 0.4))";
 
   return (
     <div>

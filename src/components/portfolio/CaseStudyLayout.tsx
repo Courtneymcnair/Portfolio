@@ -48,7 +48,7 @@ export function CaseStudySection({
         background: bgMap[background],
         padding: "clamp(56px, 8vw, 96px) var(--content-padding)",
         borderTop: topRule
-          ? "1px solid var(--hair-color, rgba(42,15,8,0.12))"
+          ? "1px solid var(--hair-color, rgba(10, 10, 15, 0.12))"
           : undefined,
       }}
     >

@@ -38,8 +38,8 @@ export default function MetaGrid({ items, columns = 4 }: Props) {
         gridTemplateColumns: `repeat(auto-fit, minmax(260px, 1fr))`,
         gap: 32,
         padding: "32px 0",
-        borderTop: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
-        borderBottom: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
+        borderTop: "1px solid var(--hair-color, rgba(10, 10, 15, 0.12))",
+        borderBottom: "1px solid var(--hair-color, rgba(10, 10, 15, 0.12))",
         maxWidth: columns === 4 ? "none" : columns * 220,
       }}
     >

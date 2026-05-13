@@ -46,7 +46,7 @@ function variantStyle(variant: Variant): React.CSSProperties {
       return {
         background: "transparent",
         color: "var(--ink, #0A0A0F)",
-        border: "1px solid var(--hair-strong, rgba(42,15,8,0.32))",
+        border: "1px solid var(--hair-strong, rgba(10, 10, 15, 0.32))",
       };
     case "link":
       return {
@@ -78,13 +78,13 @@ export default function Button({
     fontSize: SIZE_TEXT[size],
     letterSpacing: isLink ? "-0.01em" : "0.02em",
     padding: isLink ? 0 : SIZE_PADDING[size],
-    borderRadius: isLink ? 0 : "var(--warm-radius-pill, 999px)",
+    borderRadius: isLink ? 0 : "var(--r-pill, 999px)",
     cursor: "pointer",
     display: "inline-flex",
     alignItems: "center",
     gap: 10,
     transition:
-      "transform var(--warm-duration-base, 250ms) var(--warm-ease-out, cubic-bezier(0.22,1,0.36,1)), background var(--warm-duration-base, 250ms), color var(--warm-duration-base, 250ms)",
+      "transform var(--dur-small, 250ms) var(--ease-out, cubic-bezier(0.22,1,0.36,1)), background var(--dur-small, 250ms), color var(--dur-small, 250ms)",
     textDecoration: isLink ? "underline" : "none",
     textUnderlineOffset: isLink ? "4px" : undefined,
     whiteSpace: "nowrap",

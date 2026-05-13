@@ -82,10 +82,10 @@ function Panel({ side, panel }: { side: "left" | "right"; panel: SidePanel }) {
         position: "relative",
         aspectRatio: "4 / 3",
         width: "100%",
-        borderRadius: "var(--warm-radius-md, 12px)",
+        borderRadius: "var(--r-md, 12px)",
         overflow: "hidden",
-        border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
-        boxShadow: "var(--shadow-2, 0 4px 14px rgba(42,15,8,0.08))",
+        border: "1px solid var(--border-color, rgba(10, 10, 15, 0.2))",
+        boxShadow: "var(--shadow-2, 0 4px 14px rgba(10, 10, 15, 0.08))",
         background: "var(--paper-card, #FFFFFF)",
       }}
     >
@@ -103,8 +103,8 @@ function Panel({ side, panel }: { side: "left" | "right"; panel: SidePanel }) {
             top: 12,
             left: 12,
             padding: "4px 10px",
-            borderRadius: "var(--warm-radius-pill, 999px)",
-            background: "rgba(255, 233, 214, 0.9)",
+            borderRadius: "var(--r-pill, 999px)",
+            background: "rgba(244, 244, 240, 0.9)",
             backdropFilter: "blur(8px)",
             WebkitBackdropFilter: "blur(8px)",
             fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
@@ -142,14 +142,14 @@ function ConnectionColumn({
 const ticketBase: React.CSSProperties = {
   position: "absolute",
   padding: "4px 10px",
-  borderRadius: "var(--warm-radius-pill, 999px)",
+  borderRadius: "var(--r-pill, 999px)",
   fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
   fontSize: 9,
   fontWeight: 600,
   letterSpacing: "0.12em",
   textTransform: "uppercase",
   whiteSpace: "nowrap",
-  boxShadow: "0 4px 12px rgba(184, 51, 26, 0.35)",
+  boxShadow: "0 4px 12px rgba(50, 80, 255, 0.35)",
   pointerEvents: "none",
 };
 

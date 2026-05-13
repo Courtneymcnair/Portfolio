@@ -46,10 +46,10 @@ export default function PrototypeEmbed({
           position: "relative",
           width: "100%",
           aspectRatio: aspect,
-          borderRadius: "var(--warm-radius-md, 12px)",
+          borderRadius: "var(--r-md, 12px)",
           overflow: "hidden",
           background: "var(--grey-5, #ECECE6)",
-          border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
+          border: "1px solid var(--border-color, rgba(10, 10, 15, 0.2))",
         }}
       >
         {!active && (
@@ -96,7 +96,7 @@ export default function PrototypeEmbed({
                 background: "var(--accent, #3250FF)",
                 color: "#F4F4F0",
                 boxShadow:
-                  "var(--shadow-2, 0 4px 14px rgba(42,15,8,0.08))",
+                  "var(--shadow-2, 0 4px 14px rgba(10, 10, 15, 0.08))",
               }}
             >
               <Play size={24} strokeWidth={1.75} fill="currentColor" />
@@ -130,7 +130,7 @@ export default function PrototypeEmbed({
                   fontWeight: 600,
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
-                  color: "var(--grey-2, rgba(42,15,8,0.65))",
+                  color: "var(--grey-2, rgba(10, 10, 15, 0.65))",
                 }}
               >
                 Loading prototype…
@@ -169,7 +169,7 @@ export default function PrototypeEmbed({
             fontSize: 13,
             fontWeight: 500,
             letterSpacing: "0.04em",
-            color: "var(--grey-2, rgba(42,15,8,0.65))",
+            color: "var(--grey-2, rgba(10, 10, 15, 0.65))",
           }}
         >
           <span>{caption}</span>

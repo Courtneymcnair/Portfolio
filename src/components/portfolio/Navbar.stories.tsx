@@ -14,7 +14,7 @@ function Frame({ children }: { children: React.ReactNode }) {
   return (
     <div style={{ minHeight: "100vh", background: "#F4F4F0" }}>
       {children}
-      <div style={{ height: 1200, padding: 56, color: "rgba(42,15,8,0.4)", fontSize: 14 }}>
+      <div style={{ height: 1200, padding: 56, color: "rgba(10, 10, 15, 0.4)", fontSize: 14 }}>
         Scroll content — navbar is sticky.
       </div>
     </div>

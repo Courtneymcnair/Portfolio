@@ -40,10 +40,10 @@ export default function IconCardGrid({ items, columns = 2 }: Props) {
             style={{
               gridColumn: isLastOdd ? `span ${columns}` : undefined,
               background: "var(--paper-card, #FFFFFF)",
-              border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
-              borderRadius: "var(--warm-radius-md, 12px)",
+              border: "1px solid var(--border-color, rgba(10, 10, 15, 0.2))",
+              borderRadius: "var(--r-md, 12px)",
               padding: "clamp(20px, 2.4vw, 28px)",
-              boxShadow: "var(--shadow-1, 0 1px 2px rgba(42,15,8,0.06))",
+              boxShadow: "var(--shadow-1, 0 1px 2px rgba(10, 10, 15, 0.06))",
               display: "flex",
               gap: 16,
               alignItems: "flex-start",
@@ -52,16 +52,16 @@ export default function IconCardGrid({ items, columns = 2 }: Props) {
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.boxShadow =
-                "var(--shadow-2, 0 4px 14px rgba(42,15,8,0.08))";
+                "var(--shadow-2, 0 4px 14px rgba(10, 10, 15, 0.08))";
               e.currentTarget.style.borderColor =
-                "var(--border-strong, rgba(42,15,8,0.45))";
+                "var(--border-strong, rgba(10, 10, 15, 0.45))";
               e.currentTarget.style.transform = "translateY(-2px)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.boxShadow =
-                "var(--shadow-1, 0 1px 2px rgba(42,15,8,0.06))";
+                "var(--shadow-1, 0 1px 2px rgba(10, 10, 15, 0.06))";
               e.currentTarget.style.borderColor =
-                "var(--border-color, rgba(42,15,8,0.2))";
+                "var(--border-color, rgba(10, 10, 15, 0.2))";
               e.currentTarget.style.transform = "";
             }}
           >
@@ -70,7 +70,7 @@ export default function IconCardGrid({ items, columns = 2 }: Props) {
                 flexShrink: 0,
                 width: 44,
                 height: 44,
-                borderRadius: "var(--warm-radius-sm, 4px)",
+                borderRadius: "var(--r-sm, 4px)",
                 background: "var(--accent-tint, #E5E9FF)",
                 display: "flex",
                 alignItems: "center",

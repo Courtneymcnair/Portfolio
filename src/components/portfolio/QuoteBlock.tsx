@@ -12,8 +12,8 @@ export default function QuoteBlock({ quote, attribution, role }: Props) {
       style={{
         margin: 0,
         padding: "40px 0",
-        borderTop: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
-        borderBottom: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
+        borderTop: "1px solid var(--hair-color, rgba(10, 10, 15, 0.12))",
+        borderBottom: "1px solid var(--hair-color, rgba(10, 10, 15, 0.12))",
         maxWidth: 880,
       }}
     >
