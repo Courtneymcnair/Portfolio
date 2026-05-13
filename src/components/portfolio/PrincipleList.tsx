@@ -1,30 +1,24 @@
-'use client';
+"use client";
 
-import { useInView } from '@/lib/useInView';
-
-export interface PrincipleItem {
+export type PrincipleItem = {
   lead: string;
-  body: string;
+  body?: string;
   sublist?: string[];
-}
+};
 
-interface PrincipleListProps {
+type Props = {
   items: PrincipleItem[];
-}
+};
 
-export default function PrincipleList({ items }: PrincipleListProps) {
-  const [ref, inView] = useInView<HTMLUListElement>();
-
+export default function PrincipleList({ items }: Props) {
   return (
     <ul
-      ref={ref}
-      className={`stagger ${inView ? 'stagger--in' : ''}`}
       style={{
-        listStyle: 'none',
+        listStyle: "none",
         padding: 0,
         margin: 0,
-        display: 'flex',
-        flexDirection: 'column',
+        display: "flex",
+        flexDirection: "column",
         gap: 22,
         maxWidth: 760,
       }}
@@ -33,36 +27,37 @@ export default function PrincipleList({ items }: PrincipleListProps) {
         <li
           key={i}
           style={{
-            ...({ '--i': i } as React.CSSProperties),
             paddingLeft: 18,
-            borderLeft: '2px solid var(--grey-4)',
+            borderLeft: "2px solid var(--hair-color, rgba(42,15,8,0.12))",
           }}
         >
           <p
             style={{
-              fontFamily: 'var(--sans)',
+              fontFamily: "var(--sans, 'Plus Jakarta Sans', sans-serif)",
               fontSize: 16.5,
               lineHeight: 1.6,
-              color: 'var(--ink)',
+              color: "var(--ink, #0A0A0F)",
               margin: 0,
             }}
           >
             <strong style={{ fontWeight: 600 }}>{item.lead}</strong>
             {item.body && (
               <>
-                {' '}
-                <span style={{ color: 'var(--grey-1)' }}>{item.body}</span>
+                {" "}
+                <span style={{ color: "var(--grey-1, #1A1A22)" }}>
+                  {item.body}
+                </span>
               </>
             )}
           </p>
           {item.sublist && item.sublist.length > 0 && (
             <ul
               style={{
-                listStyle: 'none',
+                listStyle: "none",
                 padding: 0,
-                margin: '10px 0 0',
-                display: 'flex',
-                flexDirection: 'column',
+                margin: "10px 0 0",
+                display: "flex",
+                flexDirection: "column",
                 gap: 6,
               }}
             >
@@ -70,23 +65,24 @@ export default function PrincipleList({ items }: PrincipleListProps) {
                 <li
                   key={j}
                   style={{
-                    fontFamily: 'var(--sans)',
+                    fontFamily:
+                      "var(--sans, 'Plus Jakarta Sans', sans-serif)",
                     fontSize: 14.5,
                     lineHeight: 1.55,
-                    color: 'var(--grey-2)',
+                    color: "var(--grey-1, #1A1A22)",
                     paddingLeft: 16,
-                    position: 'relative',
+                    position: "relative",
                   }}
                 >
                   <span
                     aria-hidden="true"
                     style={{
-                      position: 'absolute',
+                      position: "absolute",
                       left: 0,
-                      top: '0.7em',
+                      top: "0.7em",
                       width: 6,
                       height: 1,
-                      background: 'var(--grey-3)',
+                      background: "var(--ink-faint, rgba(42,15,8,0.4))",
                     }}
                   />
                   {sub}

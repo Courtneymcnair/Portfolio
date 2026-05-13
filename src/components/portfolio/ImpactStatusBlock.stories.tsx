@@ -1,62 +1,114 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import ImpactStatusBlock from './ImpactStatusBlock';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import ImpactStatusBlock from "./ImpactStatusBlock";
 
-const meta = {
-  title: 'Case Study/ImpactStatusBlock',
+const meta: Meta<typeof ImpactStatusBlock> = {
+  title: "Case Study/ImpactStatusBlock",
   component: ImpactStatusBlock,
-  parameters: {
-    layout: 'padded',
-    docs: {
-      description: {
-        component:
-          'Status-aware impact section. Pill shows whether the project is in active development, shipped, or planned. "Today" column lists what is currently true; optional "Coming" column lists what is expected. Optional italic future-data note for when shipped metrics will replace the current narrative.',
-      },
-    },
-  },
-  argTypes: {
-    statusVariant: { control: { type: 'inline-radio' }, options: ['active', 'shipped', 'planned'] },
-  },
-  args: {
-    statusLabel: 'In active development',
-    statusVariant: 'active',
-    today: [
-      'Full design scoping and front-end product architecture locked for demo build',
-      'Functional overview document delivered to stakeholders ahead of demo',
-      'Build phases sequenced collaboratively with the lead developer',
-      'Data center operator stakeholders aligned with proposed direction through co-led discovery',
-    ],
-    coming: [
-      'Demo to client end of May 2026',
-      'First production use expected mid-late June 2026',
-      'Adoption metrics, dispatch volume, time-to-onboard, invoicing cycle time',
-      'Qualitative feedback from production users',
-    ],
-    futureNote: 'This section will be updated with real shipped metrics as data arrives.',
-  },
-} satisfies Meta<typeof ImpactStatusBlock>;
+  parameters: { layout: "padded" },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof ImpactStatusBlock>;
 
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--content-padding)",
+  background: "#F4F4F0",
+};
 
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
+const TODAY = [
+  "Onboarded 3 vendor cohorts (47 vendors total) with no support escalations",
+  "Reduced average onboarding time from 11 days to 2",
+  "Retired 6 legacy tools and consolidated to a single portal",
+];
+
+const COMING = [
+  "Self-serve compliance review queue (Q3)",
+  "Vendor performance scoring with monthly export (Q4)",
+];
+
+const NOTE =
+  "Six-month retention and NPS data lands in Q4 — this case study will be updated when the numbers are in.";
+
+export const Active: Story = {
+  render: () => (
+    <div style={wrap}>
+      <ImpactStatusBlock
+        statusLabel="Active in production"
+        statusVariant="active"
+        today={TODAY}
+        coming={COMING}
+        futureNote={NOTE}
+      />
+    </div>
+  ),
+};
 
 export const Shipped: Story = {
-  args: {
-    statusLabel: 'Shipped',
-    statusVariant: 'shipped',
-    today: [
-      '47% reduction in time-to-onboard new vendors',
-      '22 enterprise clients using the per-connection config in production',
-      'Vendor adoption rate of 91% within the first 60 days',
-    ],
-    coming: undefined,
-    futureNote: undefined,
-    todayLabel: 'Outcomes',
-  },
+  render: () => (
+    <div style={wrap}>
+      <ImpactStatusBlock
+        statusLabel="Shipped"
+        statusVariant="shipped"
+        today={TODAY}
+      />
+    </div>
+  ),
+};
+
+export const Planned: Story = {
+  render: () => (
+    <div style={wrap}>
+      <ImpactStatusBlock
+        statusLabel="Planned for Q3"
+        statusVariant="planned"
+        today={["Discovery interviews complete", "Spec drafted, in review"]}
+        coming={["Build kicks off June 2026", "First cohort early July"]}
+      />
+    </div>
+  ),
+};
+
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <ImpactStatusBlock
+        statusLabel="Active in production"
+        statusVariant="active"
+        today={TODAY}
+        coming={COMING}
+        futureNote={NOTE}
+      />
+    </div>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <ImpactStatusBlock
+        statusLabel="Active in production"
+        statusVariant="active"
+        today={TODAY}
+        coming={COMING}
+        futureNote={NOTE}
+      />
+    </div>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <div style={{ ...wrap, padding: "32px var(--content-padding)" }}>
+      <ImpactStatusBlock
+        statusLabel="Active in production"
+        statusVariant="active"
+        today={TODAY}
+        coming={COMING}
+        futureNote={NOTE}
+      />
+    </div>
+  ),
 };

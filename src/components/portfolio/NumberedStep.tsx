@@ -1,44 +1,37 @@
-'use client';
+"use client";
 
-import { useInView } from '@/lib/useInView';
-
-interface NumberedStepProps {
+type Props = {
   number: string;
   title: string;
   children: React.ReactNode;
-}
+};
 
-export default function NumberedStep({ number, title, children }: NumberedStepProps) {
-  const [ref, inView] = useInView<HTMLElement>();
-
+export default function NumberedStep({ number, title, children }: Props) {
   return (
     <section
-      ref={ref}
       style={{
         maxWidth: 1100,
-        margin: '0 auto',
-        padding: 'clamp(28px, 4vw, 48px) clamp(20px, 4vw, 56px)',
+        margin: "0 auto",
+        padding: "clamp(28px, 4vw, 48px) 0",
       }}
-      className="numbered-step"
     >
       <header
         style={{
-          display: 'flex',
-          alignItems: 'baseline',
-          gap: 'clamp(14px, 2vw, 24px)',
+          display: "flex",
+          alignItems: "baseline",
+          gap: "clamp(14px, 2vw, 24px)",
           marginBottom: 24,
         }}
       >
         <span
-          className={`num-eyebrow ${inView ? 'num-eyebrow--in' : ''}`}
           style={{
             flexShrink: 0,
-            minWidth: 'clamp(40px, 5vw, 64px)',
-            fontFamily: 'var(--mono)',
-            fontSize: 'clamp(28px, 4vw, 48px)',
+            minWidth: "clamp(40px, 5vw, 64px)",
+            fontFamily: "var(--mono, 'JetBrains Mono', monospace)",
+            fontSize: "clamp(28px, 4vw, 48px)",
             lineHeight: 1,
-            color: 'var(--accent)',
-            letterSpacing: '-0.01em',
+            color: "var(--accent, #3250FF)",
+            letterSpacing: "-0.01em",
             fontWeight: 400,
           }}
         >
@@ -47,12 +40,12 @@ export default function NumberedStep({ number, title, children }: NumberedStepPr
         <h3
           style={{
             flex: 1,
-            fontFamily: 'var(--display)',
+            fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
             fontWeight: 500,
-            fontSize: 'clamp(24px, 3vw, 34px)',
+            fontSize: "clamp(24px, 3vw, 34px)",
             lineHeight: 1.25,
-            letterSpacing: '-0.005em',
-            color: 'var(--ink)',
+            letterSpacing: "-0.015em",
+            color: "var(--ink, #0A0A0F)",
             margin: 0,
           }}
         >
@@ -61,11 +54,11 @@ export default function NumberedStep({ number, title, children }: NumberedStepPr
       </header>
       <div
         style={{
-          fontFamily: 'var(--sans)',
+          fontFamily: "var(--sans, 'Plus Jakarta Sans', sans-serif)",
           fontSize: 16.5,
           lineHeight: 1.65,
-          color: 'var(--grey-1)',
-          maxWidth: '100%',
+          color: "var(--grey-1, #1A1A22)",
+          maxWidth: "100%",
         }}
       >
         {children}

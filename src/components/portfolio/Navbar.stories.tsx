@@ -1,36 +1,57 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import Navbar from './Navbar';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import Navbar from "./Navbar";
 
-const meta = {
-  title: 'Layout/Navbar',
+const meta: Meta<typeof Navbar> = {
+  title: "Layout/Navbar",
   component: Navbar,
-  parameters: {
-    layout: 'fullscreen',
-    nextjs: { navigation: { pathname: '/' } },
-    docs: {
-      description: {
-        component:
-          'Fixed top navigation. Mono type, paper background, hairline bottom border. Highlights "Work" on `/` and `/work/*`, "About" on `/about`. Mobile: collapses to a "Menu" button that opens a full-screen overlay.',
-      },
-    },
-  },
-} satisfies Meta<typeof Navbar>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
-
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
-
-export const OnAboutPage: Story = {
-  parameters: { nextjs: { navigation: { pathname: '/about' } } },
+  parameters: { layout: "fullscreen" },
 };
 
-export const OnCaseStudyPage: Story = {
-  parameters: { nextjs: { navigation: { pathname: '/work/chekhub' } } },
+export default meta;
+type Story = StoryObj<typeof Navbar>;
+
+function Frame({ children }: { children: React.ReactNode }) {
+  return (
+    <div style={{ minHeight: "100vh", background: "#F4F4F0" }}>
+      {children}
+      <div style={{ height: 1200, padding: 56, color: "rgba(42,15,8,0.4)", fontSize: 14 }}>
+        Scroll content — navbar is sticky.
+      </div>
+    </div>
+  );
+}
+
+export const Default: Story = {
+  render: () => (
+    <Frame>
+      <Navbar activeHref="/" />
+    </Frame>
+  ),
+};
+
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <Frame>
+      <Navbar activeHref="/about" />
+    </Frame>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <Frame>
+      <Navbar activeHref="/" />
+    </Frame>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <Frame>
+      <Navbar activeHref="/" />
+    </Frame>
+  ),
 };

@@ -1,48 +1,71 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import HeroComposite from './HeroComposite';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import HeroComposite from "./HeroComposite";
 
-const meta = {
-  title: 'Case Study/HeroComposite',
+const meta: Meta<typeof HeroComposite> = {
+  title: "Case Study/HeroComposite",
   component: HeroComposite,
-  parameters: {
-    layout: 'fullscreen',
-    docs: {
-      description: {
-        component:
-          'Animated two-sided hero visual. Left and right panels fade in from their outer edges. An accent-blue line draws between them after the panels settle. A "ticket" pill travels left-to-right along the line every 4s on a soft loop. Built specifically for the Vendor Portal case study (client side ↔ vendor side, connected by a shared ticket), but reusable for any "two surfaces, one shared object" hero.',
-      },
-    },
-  },
-  args: {
-    left: {
-      src: '/images/thumbnails/chekhub.png',
-      alt: 'Client side dashboard',
-      label: 'Client',
-    },
-    right: {
-      src: '/images/thumbnails/chekhub.png',
-      alt: 'Vendor portal',
-      label: 'Vendor',
-    },
-    showTicketLoop: true,
-    ticketLabel: 'TICKET #1042',
-  },
-} satisfies Meta<typeof HeroComposite>;
+  parameters: { layout: "padded" },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof HeroComposite>;
 
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--content-padding)",
+  background: "#F4F4F0",
+};
 
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
+const LEFT = {
+  src: "/images/thumbnails/chekhub.png",
+  alt: "Internal ops dashboard",
+  label: "Ops",
+};
+
+const RIGHT = {
+  src: "/images/thumbnails/chekhub.png",
+  alt: "Vendor portal view",
+  label: "Vendor",
+};
+
+export const Default: Story = {
+  render: () => (
+    <div style={wrap}>
+      <HeroComposite left={LEFT} right={RIGHT} />
+    </div>
+  ),
+};
 
 export const NoTicketLoop: Story = {
-  args: { showTicketLoop: false },
-  parameters: {
-    docs: { story: { description: 'Use when the connecting metaphor is the focus and a moving label would distract.' } },
-  },
+  render: () => (
+    <div style={wrap}>
+      <HeroComposite left={LEFT} right={RIGHT} showTicketLoop={false} />
+    </div>
+  ),
+};
+
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <HeroComposite left={LEFT} right={RIGHT} />
+    </div>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <HeroComposite left={LEFT} right={RIGHT} />
+    </div>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <HeroComposite left={LEFT} right={RIGHT} />
+    </div>
+  ),
 };

@@ -1,293 +1,327 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import Button from "./Button";
 
-// ─── Case data ──────────────────────────────────────────────────────────────
+export type WorkItem = {
+  /** Case number — e.g. "01". Use NN form to match other numbered components. */
+  n: string;
+  /** Title — the last word is italicized to mirror the blue treatment. */
+  title: string;
+  pills?: string[];
+  brief?: string;
+  href: string;
+  /** Card thumbnail image (centered inside the colored card). */
+  image: string;
+  imageAlt?: string;
+  /** Background color of the card behind the image. */
+  placeholderColor?: string;
+};
 
-const CASES = [
+type Props = {
+  label?: string;
+  /** Optional larger heading below the eyebrow. Omit for a tighter layout. */
+  heading?: string;
+  items?: WorkItem[];
+};
+
+// Colors sampled from each mockup so the card frame is cohesive with the art.
+const DEFAULT_ITEMS: WorkItem[] = [
   {
-    n: '01',
-    title: 'Operations Management Platform',
-    pills: ['0→1', 'B2B SaaS', 'Sole Designer'],
+    n: "01",
+    title: "Operations Management Platform",
+    pills: ["0→1", "B2B SaaS", "Sole Designer"],
     brief:
-      'Shipping complex operational workflows at startup speed while building design infrastructure from the ground up.',
-    metric: '0→1 foundation',
-    href: '/work/chekhub',
-    thumb: '/images/thumbnails/chekhub.png',
-    thumbAlt: 'CheKHub dashboard showing data center operations management interface',
+      "Shipping complex operational workflows at startup speed while building design infrastructure from the ground up.",
+    href: "/work/chekhub",
+    image: "/images/thumbnails/chekhub.png",
+    imageAlt: "Chekhub dashboard",
+    placeholderColor: "#F8B274", // chekhub: warm peachy orange (mockup top stop)
   },
   {
-    n: '02',
-    title: 'Open-Access Sign Language Dictionary',
-    pills: ['Accessibility', 'Lead Designer'],
+    n: "02",
+    title: "Open-Access Sign Language Dictionary",
+    pills: ["Accessibility", "Lead Designer"],
     brief:
-      'Led the design of a freely available video dictionary making FSL resources accessible to deaf and hard-of-hearing communities.',
-    metric: 'Open-access launch',
-    href: '/work/fsldictionary',
-    thumb: '/images/thumbnails/fsl.png',
-    thumbAlt: 'FSL Dictionary app showing sign language categories and video player',
+      "Led the design of a freely available video dictionary making FSL resources accessible to deaf and hard-of-hearing communities.",
+    href: "/work/fsldictionary",
+    image: "/images/thumbnails/fsl.png",
+    imageAlt: "FSL Dictionary",
+    placeholderColor: "#BDA9F0", // fsl: lavender (mockup field)
   },
   {
-    n: '03',
-    title: 'Wearable Fitness for Personalized Music',
-    pills: ['Product Concept', 'Wearables', 'Music UX'],
+    n: "03",
+    title: "Wearable Fitness for Personalized Music",
+    pills: ["Product Concept", "Wearables", "Music UX"],
     brief:
-      'A Spotify feature concept integrating wearable fitness data to personalize music to real-time physiological state.',
-    metric: 'End-to-end concept',
-    href: '/work/spotifyactive',
-    thumb: '/images/thumbnails/spotify.png',
-    thumbAlt: 'Spotify Active feature showing workout music integration with wearable data',
+      "A Spotify feature concept integrating wearable fitness data to personalize music to real-time physiological state.",
+    href: "/work/spotifyactive",
+    image: "/images/thumbnails/spotify.png",
+    imageAlt: "Spotify Active",
+    placeholderColor: "#F09438", // spotify: saturated pumpkin (mockup top stop)
   },
 ];
 
-// ─── Main section ─────────────────────────────────────────────────────────────
-
-export default function SelectWorks() {
-  const rowRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const ctaRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-  const [active, setActive] = useState(0);
-  const activeRef = useRef(0);
-
-  useEffect(() => {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const update = () => {
-      const mid = window.innerHeight / 2;
-      let bestDist = Infinity;
-      let best = 0;
-
-      rowRefs.current.forEach((el, i) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const rowCenter = rect.top + rect.height / 2;
-        const dist = Math.abs(rowCenter - mid);
-        if (dist < bestDist) { bestDist = dist; best = i; }
-      });
-
-      // Apply depth imperatively — no re-render needed
-      rowRefs.current.forEach((el, i) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const rowCenter = rect.top + rect.height / 2;
-        const dist = Math.min(1, Math.abs(rowCenter - mid) / (window.innerHeight * 0.7));
-        const eased = dist * dist;
-        const scale = prefersReduced ? 1 : 1 - eased * 0.22;
-        const depthOpacity = 1 - eased * 0.55;
-        const baseOpacity = i === best ? 1 : 0.45;
-        el.style.transform = `scale(${scale})`;
-        el.style.opacity = String(baseOpacity * depthOpacity);
-      });
-
-      // CTA visibility
-      ctaRefs.current.forEach((el, i) => {
-        if (!el) return;
-        el.style.opacity = i === best ? '1' : '0.5';
-      });
-
-      if (best !== activeRef.current) {
-        activeRef.current = best;
-        setActive(best);
-      }
-    };
-
-    window.addEventListener('scroll', update, { passive: true });
-    update();
-    return () => window.removeEventListener('scroll', update);
-  }, []);
-
+export default function SelectWorks({
+  label = "Selected work",
+  heading,
+  items = DEFAULT_ITEMS,
+}: Props) {
   return (
-    <section style={{ background: 'var(--paper)' }}>
-      {/* Section header */}
-      <div
-        className="select-works-header"
-        style={{
-          padding: '64px 88px 48px',
-          display: 'flex',
-          alignItems: 'baseline',
-          justifyContent: 'space-between',
-          borderBottom: '1px solid rgba(10,10,15,0.1)',
-        }}
-      >
-        <div>
-          <h2
+    <section
+      style={{
+        background: "var(--paper, #F4F4F0)",
+        padding: "clamp(64px, 9vw, 128px) var(--content-padding)",
+        overflowX: "clip",
+      }}
+    >
+      <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+        <header
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+            marginBottom: "clamp(24px, 3vw, 48px)",
+            maxWidth: 720,
+          }}
+        >
+          <p
             style={{
-              fontFamily: 'var(--display)',
+              fontFamily:
+                "var(--display, 'Plus Jakarta Sans', sans-serif)",
+              fontSize: "clamp(11px, 1.3vw, 15px)",
               fontWeight: 600,
-              fontSize: 'clamp(48px, 7vw, 96px)',
-              lineHeight: 1.0,
-              letterSpacing: '-0.015em',
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              color: "var(--accent, #3250FF)",
               margin: 0,
-              color: 'var(--ink)',
             }}
           >
-            Select <em>works</em>
-          </h2>
-        </div>
-      </div>
-
-      {/* Case rows */}
-      <div className="select-works-body" style={{ padding: '60px 88px 80px' }}>
-        {CASES.map((c, i) => {
-          const titleWords = c.title.split(' ');
-          const titleInit = titleWords.slice(0, -1).join(' ');
-          const titleLast = titleWords[titleWords.length - 1];
-
-          return (
-            <div
-              key={c.n}
-              ref={(el) => { rowRefs.current[i] = el; }}
-              data-case={i}
-              className="case-row"
+            {label}
+          </p>
+          {heading && (
+            <h2
               style={{
-                marginBottom: i === CASES.length - 1 ? 0 : 220,
-                willChange: 'transform, opacity',
-                transition: 'opacity 0.25s linear',
+                fontFamily:
+                  "var(--display, 'Plus Jakarta Sans', sans-serif)",
+                fontWeight: 500,
+                fontSize: "clamp(32px, 4.5vw, 56px)",
+                lineHeight: 1.1,
+                letterSpacing: "-0.025em",
+                color: "var(--ink, #0A0A0F)",
+                margin: 0,
               }}
             >
-              {/* Left — text */}
-              <div>
-                {/* Case meta */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 14,
-                    fontFamily: 'var(--mono)',
-                    fontSize: 11,
-                    letterSpacing: '0.16em',
-                    textTransform: 'uppercase',
-                    color: 'var(--grey-2)',
-                    marginBottom: 22,
-                  }}
-                >
-                  <span style={{ color: 'var(--accent)' }}>{c.n}</span>
-                </div>
+              {heading}
+            </h2>
+          )}
+        </header>
 
-                {/* Title */}
-                <h3
-                  style={{
-                    fontFamily: 'var(--display)',
-                    fontWeight: 500,
-                    fontSize: 'clamp(32px, 4vw, 60px)',
-                    lineHeight: 1.08,
-                    letterSpacing: '-0.005em',
-                    margin: 0,
-                    marginBottom: 26,
-                    color: 'var(--ink)',
-                  }}
-                >
-                  {titleInit} <em>{titleLast}</em>
-                </h3>
-
-                {/* Pills */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7, marginBottom: 24 }}>
-                  {c.pills.map((p) => (
-                    <span
-                      key={p}
-                      style={{
-                        display: 'inline-block',
-                        fontFamily: 'var(--mono)',
-                        fontSize: 10.5,
-                        letterSpacing: '0.12em',
-                        textTransform: 'uppercase',
-                        padding: '5px 11px',
-                        border: '1px solid rgba(10,10,15,0.18)',
-                        borderRadius: 'var(--r-pill)',
-                        color: 'var(--ink)',
-                        background: 'transparent',
-                        lineHeight: 1.1,
-                        whiteSpace: 'nowrap',
-                      }}
-                    >
-                      {p}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Brief */}
-                <p
-                  style={{
-                    fontFamily: 'var(--sans)',
-                    fontWeight: 400,
-                    fontSize: 17,
-                    lineHeight: 1.55,
-                    color: 'var(--grey-1)',
-                    margin: 0,
-                    maxWidth: 460,
-                  }}
-                >
-                  {c.brief}
-                </p>
-
-                {/* CTA */}
-                <Link
-                  href={c.href}
-                  ref={(el) => { ctaRefs.current[i] = el; }}
-                  style={{
-                    display: 'inline-block',
-                    marginTop: 26,
-                    fontFamily: 'var(--mono)',
-                    fontSize: 11,
-                    letterSpacing: '0.18em',
-                    textTransform: 'uppercase',
-                    color: 'var(--accent)',
-                    textDecoration: 'none',
-                    opacity: 0.5,
-                    transition: 'opacity 0.5s',
-                  }}
-                >
-                  ↳ {c.metric} · Read case →
-                </Link>
-              </div>
-
-              {/* Right — thumbnail */}
-              <div className="case-thumb" style={{ position: 'relative' }}>
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: -28,
-                    right: 0,
-                    fontFamily: 'var(--mono)',
-                    fontSize: 10,
-                    letterSpacing: '0.18em',
-                    textTransform: 'uppercase',
-                    color: 'var(--grey-2)',
-                  }}
-                >
-                  Fig. {c.n}
-                </div>
-                <Link
-                  href={c.href}
-                  style={{
-                    display: 'block',
-                    borderRadius: 'var(--r-md)',
-                    border: '1px solid rgba(10,10,15,0.12)',
-                    overflow: 'hidden',
-                    transition: 'border-color 0.2s',
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--accent)')}
-                  onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(10,10,15,0.12)')}
-                >
-                  <Image
-                    src={c.thumb}
-                    alt={c.thumbAlt}
-                    width={700}
-                    height={525}
-                    style={{
-                      display: 'block',
-                      width: '100%',
-                      height: 'auto',
-                    }}
-                  />
-                </Link>
-              </div>
-            </div>
-          );
-        })}
-
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "clamp(80px, 10vw, 160px)",
+          }}
+        >
+          {items.map((item) => (
+            <CaseRow key={item.n} item={item} />
+          ))}
+        </div>
       </div>
     </section>
   );
+}
+
+function CaseRow({ item }: { item: WorkItem }) {
+  return (
+    <article
+      className="warm-case-row"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
+        gap: "clamp(20px, 3vw, 48px)",
+        alignItems: "center",
+        width: "100%",
+      }}
+    >
+      <div style={{ minWidth: 0 }}>
+        <p
+          style={{
+            fontFamily: "var(--mono, 'JetBrains Mono', monospace)",
+            fontSize: 13,
+            letterSpacing: "0.16em",
+            color: "var(--accent, #3250FF)",
+            margin: 0,
+            marginBottom: 24,
+          }}
+        >
+          {item.n}
+        </p>
+
+        <h3
+          style={{
+            fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
+            fontWeight: 500,
+            fontSize: "clamp(32px, 4vw, 60px)",
+            lineHeight: 1.08,
+            letterSpacing: "-0.025em",
+            color: "var(--ink, #0A0A0F)",
+            margin: 0,
+            marginBottom: 26,
+          }}
+        >
+          {item.title}
+        </h3>
+
+        {item.pills && item.pills.length > 0 && (
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 8,
+              marginBottom: 24,
+            }}
+          >
+            {item.pills.map((p) => (
+              <span
+                key={p}
+                style={{
+                  display: "inline-block",
+                  fontFamily:
+                    "var(--display, 'Plus Jakarta Sans', sans-serif)",
+                  fontSize: 11,
+                  fontWeight: 600,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  padding: "5px 12px",
+                  border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
+                  borderRadius: "var(--warm-radius-pill, 999px)",
+                  color: "var(--ink, #0A0A0F)",
+                  background: "transparent",
+                  lineHeight: 1.1,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {p}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {item.brief && (
+          <p
+            style={{
+              fontFamily: "var(--sans, 'Plus Jakarta Sans', sans-serif)",
+              fontWeight: 400,
+              fontSize: 17,
+              lineHeight: 1.55,
+              color: "var(--grey-1, #1A1A22)",
+              margin: 0,
+              marginBottom: 32,
+              maxWidth: 460,
+            }}
+          >
+            {item.brief}
+          </p>
+        )}
+
+        <Button
+          href={item.href}
+          variant="primary"
+          size="md"
+          iconRight={<ArrowUpRight size={16} strokeWidth={1.75} />}
+        >
+          Read case study
+        </Button>
+      </div>
+
+      <CaseThumb
+        image={item.image}
+        alt={item.imageAlt ?? item.title}
+        bg={item.placeholderColor ?? "var(--accent-soft, #4F6BFF)"}
+      />
+
+      <style>{`
+        @media (max-width: 860px) {
+          .warm-case-row {
+            grid-template-columns: 1fr !important;
+            gap: clamp(32px, 6vw, 48px) !important;
+          }
+          .warm-case-row > :first-child {
+            order: 2;
+          }
+          .warm-case-row > :last-child {
+            order: 1;
+          }
+        }
+      `}</style>
+    </article>
+  );
+}
+
+function CaseThumb({
+  image,
+  alt,
+  bg,
+}: {
+  image: string;
+  alt: string;
+  bg: string;
+}) {
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        aspectRatio: "4 / 3",
+        borderRadius: "var(--warm-radius-lg, 24px)",
+        overflow: "hidden",
+        background: `linear-gradient(135deg, ${bg} 0%, ${shade(bg, -14)} 100%)`,
+        border: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
+        boxShadow: "var(--shadow-2, 0 4px 14px rgba(42,15,8,0.08))",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "clamp(32px, 5vw, 72px)",
+      }}
+    >
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          maxWidth: "100%",
+        }}
+      >
+        <Image
+          src={image}
+          alt={alt}
+          fill
+          sizes="(max-width: 860px) 90vw, 560px"
+          style={{ objectFit: "contain" }}
+        />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Lightly shade a hex color toward black (negative pct) or white (positive).
+ * Used to derive a subtle gradient stop from a single placeholderColor.
+ */
+function shade(hex: string, pct: number): string {
+  const clean = hex.replace("#", "");
+  if (clean.length !== 6) return hex;
+  const num = parseInt(clean, 16);
+  const r = (num >> 16) & 0xff;
+  const g = (num >> 8) & 0xff;
+  const b = num & 0xff;
+  const factor = pct / 100;
+  const adjust = (c: number) =>
+    Math.max(0, Math.min(255, Math.round(c + (factor < 0 ? c : 255 - c) * factor)));
+  return `#${[adjust(r), adjust(g), adjust(b)]
+    .map((v) => v.toString(16).padStart(2, "0"))
+    .join("")}`;
 }

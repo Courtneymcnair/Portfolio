@@ -1,39 +1,59 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import JumpButton from './JumpButton';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import JumpButton from "./JumpButton";
 
-const meta = {
-  title: 'UI/Buttons/JumpButton',
+const meta: Meta<typeof JumpButton> = {
+  title: "UI/Buttons/JumpButton",
   component: JumpButton,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component:
-          'Pill-shaped accent-blue CTA used inside case studies to jump to anchored sections (e.g. "Jump to Final Design"). Use sparingly — one per case study at most.',
-      },
-    },
-  },
-  argTypes: {
-    href: { control: 'text', description: 'Anchor or route to jump to.' },
-    label: { control: 'text', description: 'Button text. Defaults to "Jump to Final Design".' },
-  },
-  args: {
-    href: '#final-design',
-    label: 'Jump to Final Design',
-  },
-} satisfies Meta<typeof JumpButton>;
+  parameters: { layout: "padded" },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof JumpButton>;
 
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--content-padding)",
+  background: "#F4F4F0",
+};
 
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
+export const Default: Story = {
+  render: () => (
+    <div style={wrap}>
+      <JumpButton href="#final-design" />
+    </div>
+  ),
+};
 
 export const CustomLabel: Story = {
-  args: { label: 'See the live product →' },
+  render: () => (
+    <div style={wrap}>
+      <JumpButton href="#impact" label="Skip to impact" />
+    </div>
+  ),
+};
+
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <JumpButton href="#final-design" />
+    </div>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <JumpButton href="#final-design" />
+    </div>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <JumpButton href="#final-design" />
+    </div>
+  ),
 };

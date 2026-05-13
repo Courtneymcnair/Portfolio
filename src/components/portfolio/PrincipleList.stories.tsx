@@ -1,65 +1,71 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import PrincipleList from './PrincipleList';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import PrincipleList from "./PrincipleList";
 
-const meta = {
-  title: 'Case Study/PrincipleList',
+const meta: Meta<typeof PrincipleList> = {
+  title: "Case Study/PrincipleList",
   component: PrincipleList,
-  parameters: {
-    layout: 'padded',
-    docs: {
-      description: {
-        component:
-          'Vertical bold-lead bullet list for dense inline content inside a Process step or Reflection section — places where IconCardGrid would be too heavy. Each item has a bold lead, a body, and an optional sublist. Stagger reveals on scroll.',
-      },
-    },
-  },
-  args: {
-    items: [
-      {
-        lead: 'The ticket as the boundary.',
-        body: 'SLA, dispatch, compliance, billing all attach to the ticket. One shared object, scoped permissions.',
-      },
-      {
-        lead: 'Mirrored but distinct surfaces.',
-        body: 'Client manages through a Portal tab inside their workspace. Vendor gets a dedicated portal organized around their day-to-day.',
-      },
-      {
-        lead: 'Parallel onboarding, not sequential.',
-        body: 'Both sides may have requirements of each other. Both checklists, one view, shared progress. Activation gates on both completing.',
-      },
-    ],
-  },
-} satisfies Meta<typeof PrincipleList>;
+  parameters: { layout: "padded" },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof PrincipleList>;
 
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--content-padding)",
+  background: "#F4F4F0",
+};
 
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
-
-export const WithSublists: Story = {
-  args: {
-    items: [
-      {
-        lead: 'Phase 1 (Days 1–7) — Onboarding & Connection',
-        body: '~52 hrs across design, backend, frontend, testing.',
-        sublist: ['Connection invitation flow', 'Parallel onboarding checklists', 'Activation gating logic'],
-      },
-      {
-        lead: 'Phase 2 (Days 6–11) — Dispatch & Execution',
-        body: '~36 hrs.',
-        sublist: ['Ticket templates', 'Dispatch rules', 'Vendor accept/reject flow'],
-      },
-      {
-        lead: 'Phase 3 (Days 10–15) — Billing & Financial Controls',
-        body: '~32 hrs.',
-        sublist: ['Invoice pipeline', 'Multi-currency support', 'PO gate logic'],
-      },
+const ITEMS = [
+  {
+    lead: "Show status, not stages.",
+    body: "Vendors need to know what's happening right now, not which phase of a process owns the work.",
+  },
+  {
+    lead: "One source of truth per role.",
+    body: "Every screen answers a question that role asks. Anything else lives elsewhere.",
+  },
+  {
+    lead: "Make handoff legible.",
+    body: "When work moves across teams, the artifact comes with context. No re-explaining.",
+    sublist: [
+      "Embedded comments survive the transition",
+      "Required fields gate, but don't surprise",
+      "Audit trail is queryable, not just visible",
     ],
   },
+];
+
+export const Default: Story = {
+  render: () => (
+    <div style={wrap}>
+      <PrincipleList items={ITEMS} />
+    </div>
+  ),
+};
+
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <PrincipleList items={ITEMS} />
+    </div>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <PrincipleList items={ITEMS} />
+    </div>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <div style={{ ...wrap, padding: "32px var(--content-padding)" }}>
+      <PrincipleList items={ITEMS} />
+    </div>
+  ),
 };

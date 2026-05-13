@@ -1,27 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import Aside from "./Aside";
+import TLDR from "./TLDR";
 
-const meta: Meta<typeof Aside> = {
-  title: "Case Study/Aside",
-  component: Aside,
+const meta: Meta<typeof TLDR> = {
+  title: "Case Study/TLDR",
+  component: TLDR,
   parameters: { layout: "padded" },
 };
 
 export default meta;
-type Story = StoryObj<typeof Aside>;
+type Story = StoryObj<typeof TLDR>;
 
 const wrap: React.CSSProperties = {
   padding: "64px var(--content-padding)",
   background: "#F4F4F0",
 };
 
-const COPY =
-  "Most enterprise tools optimize for the operator who configures them — not the vendor who lives inside them. Flipping that perspective changed which features made the cut.";
+const BODY =
+  "Designed and shipped a vendor management portal in 90 days, replacing six fragmented systems and reducing average vendor onboarding time from 11 days to 2.";
 
 export const Default: Story = {
   render: () => (
     <div style={wrap}>
-      <Aside>{COPY}</Aside>
+      <TLDR>{BODY}</TLDR>
     </div>
   ),
 };
@@ -29,10 +29,7 @@ export const Default: Story = {
 export const CustomLabel: Story = {
   render: () => (
     <div style={wrap}>
-      <Aside label="The bet">
-        We bet that vendors would tolerate a smaller surface area in exchange
-        for fewer dead ends. The bet paid off in the first cohort.
-      </Aside>
+      <TLDR label="In short">{BODY}</TLDR>
     </div>
   ),
 };
@@ -41,7 +38,7 @@ export const Desktop: Story = {
   globals: { viewport: { value: "desktop", isRotated: false } },
   render: () => (
     <div style={wrap}>
-      <Aside>{COPY}</Aside>
+      <TLDR>{BODY}</TLDR>
     </div>
   ),
 };
@@ -50,7 +47,7 @@ export const Tablet: Story = {
   globals: { viewport: { value: "tablet", isRotated: false } },
   render: () => (
     <div style={wrap}>
-      <Aside>{COPY}</Aside>
+      <TLDR>{BODY}</TLDR>
     </div>
   ),
 };
@@ -59,7 +56,7 @@ export const Mobile: Story = {
   globals: { viewport: { value: "mobile", isRotated: false } },
   render: () => (
     <div style={{ ...wrap, padding: "32px var(--content-padding)" }}>
-      <Aside>{COPY}</Aside>
+      <TLDR>{BODY}</TLDR>
     </div>
   ),
 };

@@ -1,230 +1,303 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from "react";
+import BloomMark from "./icons/BloomMark";
+import Button from "./Button";
 
-export default function Navbar() {
-  const pathname = usePathname();
-  const [mobileOpen, setMobileOpen] = useState(false);
+type NavLink = { label: string; href: string };
+type Cta = { label: string; href: string; external?: boolean };
 
-  if (pathname.startsWith('/sandbox')) return null;
+type Props = {
+  links?: NavLink[];
+  /** Override the brand label text. */
+  brand?: string;
+  /** Active link href (drives the small underline). */
+  activeHref?: string;
+  /** Right-side CTA button. Set to null to omit. */
+  cta?: Cta | null;
+};
 
-  const isWork = pathname === '/' || pathname.startsWith('/work');
-  const isAbout = pathname === '/about';
+const DEFAULT_LINKS: NavLink[] = [
+  { label: "Work", href: "/" },
+  { label: "About", href: "/about" },
+];
+
+const DEFAULT_CTA: Cta = {
+  label: "LinkedIn",
+  href: "https://linkedin.com",
+  external: true,
+};
+
+function Hamburger({ open }: { open: boolean }) {
+  const common = {
+    stroke: "currentColor",
+    strokeWidth: 1.8,
+    strokeLinecap: "round" as const,
+  };
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 24 24"
+      width={22}
+      height={22}
+      fill="none"
+      style={{ display: "block" }}
+    >
+      {open ? (
+        <>
+          <line x1={6} y1={6} x2={18} y2={18} {...common} />
+          <line x1={6} y1={18} x2={18} y2={6} {...common} />
+        </>
+      ) : (
+        <>
+          <line x1={4} y1={7} x2={20} y2={7} {...common} />
+          <line x1={4} y1={13} x2={20} y2={13} {...common} />
+          <line x1={4} y1={19} x2={20} y2={19} {...common} />
+        </>
+      )}
+    </svg>
+  );
+}
+
+export default function Navbar({
+  links = DEFAULT_LINKS,
+  brand = "Courtney McNair",
+  activeHref,
+  cta = DEFAULT_CTA,
+}: Props) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Close on Escape.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
+  // Close menu when crossing the breakpoint into desktop.
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 721px)");
+    const onChange = () => {
+      if (mq.matches) setMenuOpen(false);
+    };
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   return (
     <>
+      <style>{`
+        .warm-nav-desktop { display: flex; }
+        .warm-nav-mobile { display: none; }
+        @media (max-width: 720px) {
+          .warm-nav-desktop { display: none; }
+          .warm-nav-mobile { display: flex; }
+        }
+      `}</style>
+
       <nav
         style={{
-          position: 'fixed',
-          top: 0, left: 0, right: 0,
+          position: "sticky",
+          top: 0,
           zIndex: 50,
-          height: 64,
-          display: 'flex',
-          alignItems: 'center',
-          paddingLeft: 56,
-          paddingRight: 56,
-          justifyContent: 'space-between',
-          background: 'var(--paper)',
-          borderBottom: 'var(--hair)',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "clamp(10px, 2.2vw, 20px) var(--content-padding)",
+          background: "rgba(255, 233, 214, 0.78)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderBottom: "1px solid var(--hair-color, rgba(10, 10, 15, 0.08))",
         }}
       >
-        {/* Logo / name */}
-        <Link
+        <a
           href="/"
           style={{
-            fontFamily: 'var(--mono)',
-            fontSize: 12,
-            letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-            color: 'var(--ink)',
-            textDecoration: 'none',
-            opacity: 1,
-            transition: 'opacity 0.2s',
-          }}
-          onMouseEnter={e => (e.currentTarget.style.opacity = '0.5')}
-          onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
-        >
-          Courtney McNair
-        </Link>
-
-        {/* Center links */}
-        <div className="hidden md:flex" style={{ gap: 32, alignItems: 'center' }}>
-          <Link
-            href="/"
-            style={{
-              fontFamily: 'var(--mono)',
-              fontSize: 12,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              color: isWork ? 'var(--accent)' : 'var(--ink)',
-              opacity: isWork ? 1 : 0.6,
-              transition: 'opacity 0.2s, color 0.2s',
-            }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-            onMouseLeave={e => (e.currentTarget.style.opacity = isWork ? '1' : '0.6')}
-          >
-            Work
-          </Link>
-          <Link
-            href="/about"
-            style={{
-              fontFamily: 'var(--mono)',
-              fontSize: 12,
-              letterSpacing: '0.08em',
-              textTransform: 'uppercase',
-              textDecoration: 'none',
-              color: isAbout ? 'var(--accent)' : 'var(--ink)',
-              opacity: isAbout ? 1 : 0.6,
-              transition: 'opacity 0.2s, color 0.2s',
-            }}
-            onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-            onMouseLeave={e => (e.currentTarget.style.opacity = isAbout ? '1' : '0.6')}
-          >
-            About
-          </Link>
-        </div>
-
-        {/* LinkedIn pill */}
-        <a
-          href="https://www.linkedin.com/in/courtney-mcnair/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden md:flex"
-          style={{
-            alignItems: 'center',
-            gap: 8,
-            padding: '6px 16px',
-            borderRadius: 'var(--r-pill)',
-            border: 'var(--hair-2)',
-            fontFamily: 'var(--mono)',
-            fontSize: 11,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: 'var(--ink)',
-            textDecoration: 'none',
-            transition: 'background 0.2s, color 0.2s',
-          }}
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLElement).style.background = 'var(--accent-tint)';
-            (e.currentTarget as HTMLElement).style.color = 'var(--accent)';
-            (e.currentTarget as HTMLElement).style.borderColor = 'var(--accent)';
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLElement).style.background = 'transparent';
-            (e.currentTarget as HTMLElement).style.color = 'var(--ink)';
-            (e.currentTarget as HTMLElement).style.borderColor = 'rgba(10,10,15,0.12)';
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+            textDecoration: "none",
+            color: "var(--ink, #0A0A0F)",
           }}
         >
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-          </svg>
-          LinkedIn
+          <BloomMark size={28} variant="icon" animate={false} />
+          <span
+            style={{
+              fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
+              fontWeight: 600,
+              fontSize: 16,
+              letterSpacing: "-0.015em",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {brand}
+          </span>
         </a>
 
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setMobileOpen(true)}
-          className="md:hidden"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 28,
-            height: 28,
-            color: 'var(--ink)',
-            background: 'none',
-            border: 'none',
-            padding: 0,
-            cursor: 'pointer',
-          }}
-          aria-label="Open navigation"
-        >
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
-            <line x1="3" y1="6" x2="19" y2="6" />
-            <line x1="3" y1="11" x2="19" y2="11" />
-            <line x1="3" y1="16" x2="19" y2="16" />
-          </svg>
-        </button>
-      </nav>
-
-      {/* Mobile overlay */}
-      {mobileOpen && (
+        {/* Desktop / tablet nav */}
         <div
+          className="warm-nav-desktop"
           style={{
-            position: 'fixed', inset: 0, zIndex: 100,
-            background: 'var(--paper)',
-            display: 'flex', flexDirection: 'column',
+            alignItems: "center",
+            gap: "clamp(20px, 3vw, 40px)",
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'flex-end', height: 64, alignItems: 'center', paddingRight: 22 }}>
-            <button
-              onClick={() => setMobileOpen(false)}
-              style={{
-                fontFamily: 'var(--mono)', fontSize: 12, letterSpacing: '0.08em',
-                textTransform: 'uppercase', color: 'var(--ink)',
-                background: 'none', border: 'none', cursor: 'pointer',
-              }}
-              aria-label="Close navigation"
+          <ul
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "clamp(20px, 3vw, 40px)",
+              margin: 0,
+              padding: 0,
+              listStyle: "none",
+            }}
+          >
+            {links.map((link) => {
+              const isActive = link.href === activeHref;
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    style={{
+                      fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
+                      fontWeight: 500,
+                      fontSize: 15,
+                      letterSpacing: "-0.005em",
+                      color: "var(--ink, #0A0A0F)",
+                      textDecoration: "none",
+                      paddingBottom: 2,
+                      borderBottom: isActive
+                        ? "1px solid var(--ink, #0A0A0F)"
+                        : "1px solid transparent",
+                      transition: "border-color var(--warm-duration-base, 250ms)",
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+          {cta ? (
+            <Button
+              variant="secondary"
+              size="sm"
+              href={cta.href}
+              iconRight={cta.external ? <span aria-hidden>↗</span> : undefined}
             >
-              Close
-            </button>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 16 }}>
-            {[
-              { href: '/', label: 'Work', active: isWork },
-              { href: '/about', label: 'About', active: isAbout },
-            ].map(({ href, label, active }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setMobileOpen(false)}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  padding: '10px 24px',
-                  borderRadius: 'var(--r-pill)',
-                  border: active ? '1px solid var(--accent)' : 'var(--hair-2)',
-                  fontFamily: 'var(--mono)',
-                  fontSize: 11,
-                  letterSpacing: '0.1em',
-                  textTransform: 'uppercase',
-                  color: active ? 'var(--accent)' : 'var(--ink)',
-                  textDecoration: 'none',
-                }}
-              >
-                {label}
-              </Link>
-            ))}
-            <a
-              href="https://www.linkedin.com/in/courtney-mcnair/"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                padding: '10px 24px',
-                borderRadius: 'var(--r-pill)',
-                border: 'var(--hair-2)',
-                fontFamily: 'var(--mono)',
-                fontSize: 11,
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: 'var(--ink)',
-                textDecoration: 'none',
-              }}
-            >
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-              LinkedIn
-            </a>
-          </div>
+              {cta.label}
+            </Button>
+          ) : null}
         </div>
-      )}
+
+        {/* Mobile hamburger trigger */}
+        <button
+          type="button"
+          className="warm-nav-mobile"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="warm-nav-panel"
+          onClick={() => setMenuOpen((v) => !v)}
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            width: 40,
+            height: 40,
+            background: "transparent",
+            border: "none",
+            padding: 0,
+            color: "var(--ink, #0A0A0F)",
+            cursor: "pointer",
+            transition: "opacity var(--warm-duration-base, 250ms)",
+          }}
+        >
+          <Hamburger open={menuOpen} />
+        </button>
+
+        {/* Mobile menu panel — only relevant on small screens; the CSS query
+            ensures it's never visible on desktop. */}
+        {menuOpen ? (
+          <div
+            id="warm-nav-panel"
+            className="warm-nav-mobile"
+            role="menu"
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              right: 0,
+              flexDirection: "column",
+              gap: 4,
+              padding: "16px var(--content-padding) 28px",
+              background: "rgba(255, 233, 214, 0.96)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              borderBottom: "1px solid var(--hair-strong, rgba(42,15,8,0.32))",
+              animation: "warm-nav-slide 280ms cubic-bezier(0.22, 1, 0.36, 1)",
+            }}
+          >
+            <style>{`
+              @keyframes warm-nav-slide {
+                from { opacity: 0; transform: translateY(-8px); }
+                to { opacity: 1; transform: translateY(0); }
+              }
+            `}</style>
+            {links.map((link) => {
+              const isActive = link.href === activeHref;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  role="menuitem"
+                  onClick={() => setMenuOpen(false)}
+                  style={{
+                    fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
+                    fontWeight: 500,
+                    fontSize: 22,
+                    letterSpacing: "-0.015em",
+                    color: "var(--ink, #0A0A0F)",
+                    textDecoration: "none",
+                    padding: "14px 0",
+                    borderBottom: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span
+                    style={{
+                      borderBottom: isActive
+                        ? "1px solid var(--ink, #0A0A0F)"
+                        : "none",
+                      paddingBottom: 1,
+                    }}
+                  >
+                    {link.label}
+                  </span>
+                  <span aria-hidden style={{ color: "var(--grey-2, rgba(42,15,8,0.65))", fontSize: 18 }}>
+                    →
+                  </span>
+                </a>
+              );
+            })}
+            {cta ? (
+              <div style={{ marginTop: 16, alignSelf: "flex-start" }}>
+                <Button
+                  variant="secondary"
+                  size="md"
+                  href={cta.href}
+                  iconRight={cta.external ? <span aria-hidden>↗</span> : undefined}
+                >
+                  {cta.label}
+                </Button>
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+      </nav>
     </>
   );
 }

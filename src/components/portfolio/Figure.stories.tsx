@@ -1,43 +1,76 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import Figure from './Figure';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import Figure from "./Figure";
 
-const meta = {
-  title: 'Case Study/Figure',
+const meta: Meta<typeof Figure> = {
+  title: "Case Study/Figure",
   component: Figure,
-  parameters: {
-    layout: 'padded',
-    docs: {
-      description: {
-        component:
-          'Image with optional caption. Replaces every `[VISUAL: ...]` placeholder in case studies. Supports four widths (content / wide / full / half), custom aspect ratio, and reveals on scroll. Hover lifts elevation.',
-      },
-    },
-  },
-  argTypes: {
-    width: { control: 'select', options: ['content', 'wide', 'full', 'half'] },
-    aspect: { control: 'text' },
-  },
-  args: {
-    src: '/images/thumbnails/chekhub.png',
-    alt: 'Chekhub dashboard',
-    caption: 'Fig. 01 — Client side dashboard, vendor connections panel',
-    width: 'content',
-    aspect: '16 / 10',
-  },
-} satisfies Meta<typeof Figure>;
+  parameters: { layout: "padded" },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Figure>;
 
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--content-padding)",
+  background: "#F4F4F0",
+};
+const SRC = "/images/thumbnails/chekhub.png";
 
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
+export const Content: Story = {
+  render: () => (
+    <div style={wrap}>
+      <Figure src={SRC} alt="Vendor portal dashboard" caption="Vendor portal — onboarding overview" />
+    </div>
+  ),
+};
 
-export const NoCaption: Story = { args: { caption: undefined } };
-export const Wide: Story = { args: { width: 'wide' } };
-export const FullBleed: Story = { args: { width: 'full' } };
-export const Half: Story = { args: { width: 'half', aspect: '4 / 3' } };
+export const Wide: Story = {
+  render: () => (
+    <div style={wrap}>
+      <Figure src={SRC} alt="Vendor portal dashboard" width="wide" caption="A wider crop for hero-level moments" />
+    </div>
+  ),
+};
+
+export const Half: Story = {
+  render: () => (
+    <div style={wrap}>
+      <Figure src={SRC} alt="Vendor portal detail" width="half" caption="Pairs nicely beside text or another half figure" />
+    </div>
+  ),
+};
+
+export const NoCaption: Story = {
+  render: () => (
+    <div style={wrap}>
+      <Figure src={SRC} alt="Vendor portal dashboard" />
+    </div>
+  ),
+};
+
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <Figure src={SRC} alt="Vendor portal dashboard" caption="Vendor portal — onboarding overview" />
+    </div>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <Figure src={SRC} alt="Vendor portal dashboard" caption="Vendor portal — onboarding overview" />
+    </div>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <div style={{ ...wrap, padding: "32px var(--content-padding)" }}>
+      <Figure src={SRC} alt="Vendor portal dashboard" caption="Vendor portal — onboarding overview" />
+    </div>
+  ),
+};

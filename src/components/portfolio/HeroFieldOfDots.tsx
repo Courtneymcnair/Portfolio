@@ -226,7 +226,6 @@ export default function HeroFieldOfDots() {
               display: 'block',
               fontFamily: 'var(--display)',
               fontWeight: 500,
-              fontStyle: 'italic',
               fontSize: 'clamp(56px, 13vw, 184px)',
               lineHeight: 0.95,
               letterSpacing: '-0.01em',

@@ -1,33 +1,59 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import SectionLabel from './SectionLabel';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import SectionLabel from "./SectionLabel";
 
-const meta = {
-  title: 'UI/Typography/SectionLabel',
+const meta: Meta<typeof SectionLabel> = {
+  title: "UI/SectionLabel",
   component: SectionLabel,
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component:
-          'Mono-type overline used above SectionHeading to label a case study section ("Problem", "Approach", "Outcome"). Uses the `cs-eyebrow` global class.',
-      },
-    },
-  },
-  argTypes: {
-    children: { control: 'text', description: 'Label text. Conventionally uppercase.' },
-  },
-  args: {
-    children: 'Problem',
-  },
-} satisfies Meta<typeof SectionLabel>;
+  parameters: { layout: "padded" },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof SectionLabel>;
 
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--content-padding)",
+  background: "#F4F4F0",
+  display: "flex",
+  flexDirection: "column",
+  gap: 48,
+};
 
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
+export const Variants: Story = {
+  render: () => (
+    <div style={wrap}>
+      <SectionLabel>Selected work</SectionLabel>
+      <SectionLabel align="center">Selected work</SectionLabel>
+      <SectionLabel withLines>Product designer</SectionLabel>
+    </div>
+  ),
+};
+
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <SectionLabel>The challenge</SectionLabel>
+      <SectionLabel withLines>Product designer</SectionLabel>
+    </div>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <SectionLabel>The challenge</SectionLabel>
+      <SectionLabel withLines>Product designer</SectionLabel>
+    </div>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <div style={{ ...wrap, padding: "48px var(--content-padding)" }}>
+      <SectionLabel>The challenge</SectionLabel>
+      <SectionLabel withLines>Product designer</SectionLabel>
+    </div>
+  ),
+};

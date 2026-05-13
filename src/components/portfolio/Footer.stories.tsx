@@ -1,27 +1,30 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import Footer from './Footer';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import Footer from "./Footer";
 
-const meta = {
-  title: 'Layout/Footer',
+const meta: Meta<typeof Footer> = {
+  title: "Layout/Footer",
   component: Footer,
-  parameters: {
-    layout: 'fullscreen',
-    docs: {
-      description: {
-        component:
-          'Compact single-row footer. Wordmark left, nav links center, "Get in touch" pill right. Wraps on narrow widths.',
-      },
-    },
-  },
-} satisfies Meta<typeof Footer>;
+  parameters: { layout: "fullscreen" },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Footer>;
 
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
+export const Default: Story = {
+  render: () => <Footer />,
+};
 
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => <Footer />,
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => <Footer />,
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => <Footer />,
+};

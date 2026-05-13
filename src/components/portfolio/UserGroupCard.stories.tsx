@@ -1,70 +1,103 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import UserGroupCard from './UserGroupCard';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { Wrench, ClipboardList } from "lucide-react";
+import UserGroupCard from "./UserGroupCard";
 
-const meta = {
-  title: 'UI/UserGroupCard',
+const meta: Meta<typeof UserGroupCard> = {
+  title: "Case Study/UserGroupCard",
   component: UserGroupCard,
-  parameters: {
-    layout: 'padded',
-    docs: {
-      description: {
-        component:
-          'User persona card with an icon, name, and labeled sections (e.g. "Goals", "Pain Points"). Accent-tint background, rounded medium. Designed to fill a grid cell — preview is constrained to ~360px to match typical use; see the InGrid story for the multi-card layout.',
-      },
-    },
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ maxWidth: 360, margin: '0 auto' }}>
-        <Story />
-      </div>
-    ),
-  ],
-  args: {
-    iconSrc: '/images/og-image.png',
-    iconAlt: 'Field technician icon',
-    name: 'Field Technician',
-    sections: [
-      { label: 'Goals', content: 'Complete jobs efficiently with the right info on hand.' },
-      { label: 'Pain points', content: 'Switching between tools, missing context on each site visit.' },
-    ],
-  },
-} satisfies Meta<typeof UserGroupCard>;
+  parameters: { layout: "padded" },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof UserGroupCard>;
 
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--content-padding)",
+  background: "#F4F4F0",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(min(280px, 100%), 1fr))",
+  gap: 32,
+  maxWidth: 1180,
+  margin: "0 auto",
+};
 
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
-
-export const InGrid: Story = {
-  decorators: [
-    (Story) => (
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: 24,
-          maxWidth: 1180,
-          margin: '0 auto',
-        }}
-      >
-        <Story />
-        <Story />
-        <Story />
-      </div>
-    ),
-  ],
-  parameters: {
-    docs: {
-      description: {
-        story: 'Three cards in the responsive grid you would actually use them in. 3 columns on desktop, 2 on tablet, 1 on mobile.',
-      },
+const TECHNICIAN = {
+  icon: Wrench,
+  name: "Field technician",
+  sections: [
+    {
+      label: "Goal",
+      content:
+        "Close out the day's tickets without chasing approvals or waiting for paperwork.",
     },
-  },
+    {
+      label: "Friction",
+      content:
+        "Has to log into three tools just to know what's been signed off and what's still open.",
+    },
+  ],
+};
+
+const OPS_LEAD = {
+  icon: ClipboardList,
+  name: "Operations lead",
+  sections: [
+    {
+      label: "Goal",
+      content:
+        "See vendor capacity, throughput, and exceptions across cohorts at a glance.",
+    },
+    {
+      label: "Friction",
+      content:
+        "Status updates arrive via Slack, email, and spreadsheets — never in the same place.",
+    },
+  ],
+};
+
+export const Single: Story = {
+  render: () => (
+    <div style={{ ...wrap, gridTemplateColumns: "minmax(0, 360px)" }}>
+      <UserGroupCard {...TECHNICIAN} />
+    </div>
+  ),
+};
+
+export const Pair: Story = {
+  render: () => (
+    <div style={wrap}>
+      <UserGroupCard {...TECHNICIAN} />
+      <UserGroupCard {...OPS_LEAD} />
+    </div>
+  ),
+};
+
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <UserGroupCard {...TECHNICIAN} />
+      <UserGroupCard {...OPS_LEAD} />
+    </div>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <UserGroupCard {...TECHNICIAN} />
+      <UserGroupCard {...OPS_LEAD} />
+    </div>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <UserGroupCard {...TECHNICIAN} />
+      <UserGroupCard {...OPS_LEAD} />
+    </div>
+  ),
 };

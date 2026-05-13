@@ -1,107 +1,95 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import NumberedStep from './NumberedStep';
-import PrincipleList from './PrincipleList';
-import Aside from './Aside';
-import Figure from './Figure';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import NumberedStep from "./NumberedStep";
 
-const meta = {
-  title: 'Case Study/NumberedStep',
+const meta: Meta<typeof NumberedStep> = {
+  title: "Case Study/NumberedStep",
   component: NumberedStep,
-  parameters: {
-    layout: 'fullscreen',
-    docs: {
-      description: {
-        component:
-          'A numbered subsection inside the Process section. Big mono number on the left, serif title and body on the right. The number fades from 30% to 100% opacity when the step enters the viewport. Accepts any combination of paragraphs, PrincipleList, Aside, and Figure as children.',
-      },
-    },
-  },
-  argTypes: {
-    number: { control: 'text' },
-    title: { control: 'text' },
-  },
-  args: {
-    number: '02',
-    title: 'The pivotal architectural decision: configurable per-connection',
-    children: (
-      <p style={{ margin: 0 }}>
-        The single most important design call on the project. It emerged from discovery, not from a spec.
-      </p>
-    ),
-  },
-} satisfies Meta<typeof NumberedStep>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
-
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
-
-export const WithFullContent: Story = {
-  args: {
-    number: '02',
-    title: 'The pivotal architectural decision: configurable per-connection',
-    children: (
-      <>
-        <p>
-          The two clients had <strong>mostly compatible</strong> needs — different priorities, different defaults.
-          Mostly compatible is the trap. Optimize for one, and the other becomes a second-class case. Unify around
-          an average, and neither client gets what they want.
-        </p>
-        <p style={{ marginTop: 16 }}>
-          <strong>The structural choice:</strong> every connection between a client and a vendor is its own
-          configuration. Same vendor, PO-required for one client and off for another. Different currencies, terms,
-          templates.
-        </p>
-        <Aside label="Honest reflection">
-          I won&apos;t claim I saw this from day one. It crystallized over discovery. It&apos;s the most
-          senior-leaning decision on the project and the one I&apos;d defend most readily.
-        </Aside>
-        <div style={{ marginTop: 24 }}>
-          <Figure
-            src="/images/thumbnails/chekhub.png"
-            alt="Diagram showing same vendor with three different connection configs"
-            caption="Fig. 02 — Same vendor, three different connection configs across three clients"
-            width="content"
-            aspect="16 / 9"
-          />
-        </div>
-      </>
-    ),
-  },
+  parameters: { layout: "padded" },
 };
 
-export const WithPrincipleList: Story = {
-  args: {
-    number: '03',
-    title: 'The two-sided interaction model',
-    children: (
-      <>
-        <p style={{ marginBottom: 20 }}>
-          The lead dev&apos;s data model gave us a shared record. My job was making that feel native on both sides.
+export default meta;
+type Story = StoryObj<typeof NumberedStep>;
+
+const wrap: React.CSSProperties = {
+  padding: "32px var(--content-padding)",
+  background: "#F4F4F0",
+};
+
+const BODY = (
+  <>
+    <p style={{ margin: 0, marginBottom: 16 }}>
+      Vendors didn&apos;t need more dashboards. They needed to know what was waiting on
+      them. So I started with a single question: <em>what do you check first when
+      you log in?</em>
+    </p>
+    <p style={{ margin: 0 }}>
+      The answer was always the same — &quot;am I blocked?&quot; That became the spine of the
+      entire portal.
+    </p>
+  </>
+);
+
+export const Default: Story = {
+  render: () => (
+    <div style={wrap}>
+      <NumberedStep number="01" title="Anchor the surface around a single question">
+        {BODY}
+      </NumberedStep>
+    </div>
+  ),
+};
+
+export const Sequence: Story = {
+  render: () => (
+    <div style={wrap}>
+      <NumberedStep number="01" title="Anchor the surface around a single question">
+        {BODY}
+      </NumberedStep>
+      <NumberedStep number="02" title="Collapse approvals where possible">
+        <p style={{ margin: 0 }}>
+          Most approvals existed because someone wanted visibility, not because
+          they were a real gate. Those got moved to passive review queues.
         </p>
-        <PrincipleList
-          items={[
-            {
-              lead: 'The ticket as the boundary.',
-              body: 'SLA, dispatch, compliance, billing all attach to the ticket. One shared object, scoped permissions.',
-            },
-            {
-              lead: 'Mirrored but distinct surfaces.',
-              body: 'Client manages through a Portal tab. Vendor gets a dedicated portal organized around their day-to-day.',
-            },
-            {
-              lead: 'Parallel onboarding, not sequential.',
-              body: 'Both checklists, one view, shared progress. Activation gates on both completing.',
-            },
-          ]}
-        />
-      </>
-    ),
-  },
+      </NumberedStep>
+      <NumberedStep number="03" title="Make the audit trail queryable">
+        <p style={{ margin: 0 }}>
+          Visibility without searchability is just clutter. Every action wrote a
+          structured event that ops could filter without opening a record.
+        </p>
+      </NumberedStep>
+    </div>
+  ),
+};
+
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <NumberedStep number="01" title="Anchor the surface around a single question">
+        {BODY}
+      </NumberedStep>
+    </div>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <NumberedStep number="01" title="Anchor the surface around a single question">
+        {BODY}
+      </NumberedStep>
+    </div>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <NumberedStep number="01" title="Anchor the surface around a single question">
+        {BODY}
+      </NumberedStep>
+    </div>
+  ),
 };

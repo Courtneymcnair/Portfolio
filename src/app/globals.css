@@ -24,11 +24,10 @@
   --grey-5:        #ECECE6;
 
   /* Typography */
-  --display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --sans:    'Geist', system-ui, sans-serif;
+  --display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --sans:    'Plus Jakarta Sans', system-ui, sans-serif;
   --mono:    'JetBrains Mono', ui-monospace, monospace;
-  /* Source Serif 4 is more even-weighted than a classical garalde — slightly tighter tracking works */
-  --tracking-display: -0.01em;
+  --tracking-display: -0.02em;
 
   /* Radius — all buttons use --r-pill (999px) */
   --r-xs:   6px;
@@ -47,6 +46,26 @@
   --hair:      1px solid rgba(10,10,15,0.08);
   --hair-2:    1px solid rgba(10,10,15,0.12);
   --hair-blue: 1px solid rgba(50,80,255,0.18);
+
+  /* Tokens consumed by migrated case-study components */
+  --ink-faint:        rgba(10,10,15,0.4);
+  --ink-ghost:        rgba(10,10,15,0.2);
+  --hair-color:       rgba(10,10,15,0.08);
+  --hair-strong:      rgba(10,10,15,0.32);
+  --border-color:     rgba(10,10,15,0.2);
+  --border-strong:    rgba(10,10,15,0.45);
+  --content-padding:  clamp(24px, 5vw, 56px);
+  --text-display:     clamp(36px, 6.5vw, 88px);
+  --text-h1:          clamp(40px, 5vw, 72px);
+  --text-h2:          clamp(28px, 3.5vw, 48px);
+  --text-h3:          clamp(22px, 2.4vw, 32px);
+  --text-h4:          clamp(18px, 1.7vw, 22px);
+  --text-lead:        clamp(19px, 1.5vw, 22px);
+  --text-body:        clamp(16px, 1.1vw, 18px);
+  --text-body-sm:     15px;
+  --text-caption:     13px;
+  --text-label:       15px;
+  --text-mono:        14px;
 
   /* Motion — soft deceleration, vertical-only, unhurried */
   --ease-out:     cubic-bezier(0.22, 1, 0.36, 1);
@@ -79,8 +98,8 @@
   --color-text-muted:      #6B6B78;
 
   /* Fonts */
-  --font-display: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --font-sans:    'Geist', system-ui, sans-serif;
+  --font-display: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans:    'Plus Jakarta Sans', system-ui, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, monospace;
 
   /* Radius */

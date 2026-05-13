@@ -1,59 +1,72 @@
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
 
-interface ProjectCardProps {
+type Props = {
   title: string;
-  meta?: string;
-  href: string;
-  imageSrc: string;
-  imageAlt: string;
-}
+  href?: string;
+  /** Optional image src — if absent, renders a colored placeholder. */
+  image?: string;
+  /** Placeholder background color for when image is absent. */
+  placeholderColor?: string;
+};
 
-export default function ProjectCard({ title, href, imageSrc, imageAlt }: ProjectCardProps) {
+export default function ProjectCard({
+  title,
+  href,
+  image,
+  placeholderColor = "var(--accent-tint, #E5E9FF)",
+}: Props) {
+  const Wrap = (href ? "a" : "div") as React.ElementType;
+
   return (
-    <Link
+    <Wrap
       href={href}
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 24,
-        textDecoration: 'none',
-        color: 'inherit',
+        display: "flex",
+        flexDirection: "column",
+        gap: 20,
+        textDecoration: "none",
+        color: "inherit",
+        cursor: href ? "pointer" : "default",
+        transition: "transform var(--warm-duration-medium, 400ms) var(--warm-ease-out, cubic-bezier(0.22,1,0.36,1))",
       }}
-      className="project-card"
     >
       <div
         style={{
-          position: 'relative',
-          width: '100%',
-          aspectRatio: '4 / 3',
-          borderRadius: 'var(--r-md)',
-          overflow: 'hidden',
+          aspectRatio: "4 / 3",
+          background: placeholderColor,
+          borderRadius: "var(--warm-radius-md, 12px)",
+          overflow: "hidden",
+          border: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
+          position: "relative",
         }}
       >
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          className="object-cover project-card-img"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
+        {image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={image}
+            alt=""
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          />
+        ) : null}
       </div>
-      <p
+      <h3
         style={{
-          fontFamily: 'var(--display)',
-          fontWeight: 500,
-          fontSize: 'clamp(20px, 2vw, 26px)',
-          lineHeight: 1.3,
-          letterSpacing: 0,
-          color: 'var(--ink)',
-          textAlign: 'center',
           margin: 0,
-          padding: '0 8px',
+          fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
+          fontWeight: 600,
+          fontSize: "clamp(20px, 1.8vw, 26px)",
+          letterSpacing: "-0.015em",
+          lineHeight: 1.2,
+          color: "var(--ink, #0A0A0F)",
         }}
       >
         {title}
-      </p>
-    </Link>
+      </h3>
+    </Wrap>
   );
 }

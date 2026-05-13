@@ -1,10 +1,8 @@
-'use client';
+"use client";
 
-import { useInView } from '@/lib/useInView';
+type StatusVariant = "active" | "shipped" | "planned";
 
-type StatusVariant = 'active' | 'shipped' | 'planned';
-
-interface ImpactStatusBlockProps {
+type Props = {
   statusLabel: string;
   statusVariant?: StatusVariant;
   today: string[];
@@ -12,64 +10,85 @@ interface ImpactStatusBlockProps {
   futureNote?: string;
   todayLabel?: string;
   comingLabel?: string;
-}
+};
 
-const variantColors: Record<StatusVariant, { bg: string; text: string; dot: string }> = {
-  active: { bg: 'var(--accent-tint)', text: 'var(--accent)', dot: 'var(--accent)' },
-  shipped: { bg: '#E6F4EA', text: '#1E7C3A', dot: '#1E7C3A' },
-  planned: { bg: 'var(--grey-5)', text: 'var(--grey-2)', dot: 'var(--grey-2)' },
+const variantColors: Record<
+  StatusVariant,
+  { bg: string; text: string; dot: string }
+> = {
+  active: {
+    bg: "var(--accent-tint, #E5E9FF)",
+    text: "var(--accent, #3250FF)",
+    dot: "var(--accent, #3250FF)",
+  },
+  shipped: {
+    bg: "#E8E4D0",
+    text: "#5A4A1C",
+    dot: "#5A4A1C",
+  },
+  planned: {
+    bg: "var(--grey-5, #ECECE6)",
+    text: "var(--grey-2, rgba(42,15,8,0.65))",
+    dot: "var(--grey-2, rgba(42,15,8,0.65))",
+  },
 };
 
 export default function ImpactStatusBlock({
   statusLabel,
-  statusVariant = 'active',
+  statusVariant = "active",
   today,
   coming,
   futureNote,
-  todayLabel = 'Today',
-  comingLabel = 'Coming',
-}: ImpactStatusBlockProps) {
-  const [ref, inView] = useInView<HTMLDivElement>();
+  todayLabel = "Today",
+  comingLabel = "Coming",
+}: Props) {
   const colors = variantColors[statusVariant];
 
   return (
     <div
-      ref={ref}
-      className={`reveal ${inView ? 'reveal--in' : ''}`}
-      style={{ maxWidth: 1100, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: 32 }}
+      style={{
+        maxWidth: 1100,
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        gap: 32,
+      }}
     >
       <span
         style={{
-          alignSelf: 'flex-start',
-          display: 'inline-flex',
-          alignItems: 'center',
+          alignSelf: "flex-start",
+          display: "inline-flex",
+          alignItems: "center",
           gap: 8,
-          padding: '6px 14px',
-          borderRadius: 'var(--r-pill)',
+          padding: "6px 14px",
+          borderRadius: "var(--warm-radius-pill, 999px)",
           background: colors.bg,
           color: colors.text,
-          fontFamily: 'var(--mono)',
-          fontSize: 11,
-          letterSpacing: '0.12em',
-          textTransform: 'uppercase',
+          fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
+          fontSize: 12,
+          fontWeight: 600,
+          letterSpacing: "0.12em",
+          textTransform: "uppercase",
         }}
       >
         <span
+          aria-hidden
           style={{
             width: 6,
             height: 6,
-            borderRadius: '50%',
+            borderRadius: "50%",
             background: colors.dot,
           }}
-          aria-hidden="true"
         />
         {statusLabel}
       </span>
 
       <div
         style={{
-          display: 'grid',
-          gridTemplateColumns: coming ? 'repeat(auto-fit, minmax(280px, 1fr))' : '1fr',
+          display: "grid",
+          gridTemplateColumns: coming
+            ? "repeat(auto-fit, minmax(min(280px, 100%), 1fr))"
+            : "1fr",
           gap: 32,
         }}
       >
@@ -80,15 +99,14 @@ export default function ImpactStatusBlock({
       {futureNote && (
         <p
           style={{
-            fontFamily: 'var(--display)',
-            fontStyle: 'italic',
+            fontFamily: "var(--sans, 'Plus Jakarta Sans', sans-serif)",
             fontWeight: 400,
             fontSize: 16,
-            lineHeight: 1.5,
-            color: 'var(--grey-2)',
+            lineHeight: 1.55,
+            color: "var(--grey-2, rgba(42,15,8,0.65))",
             margin: 0,
             paddingTop: 16,
-            borderTop: 'var(--hair-2)',
+            borderTop: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
           }}
         >
           {futureNote}
@@ -107,43 +125,60 @@ function StatusColumn({
   items: string[];
   accent?: boolean;
 }) {
+  const labelColor = accent
+    ? "var(--accent, #3250FF)"
+    : "var(--grey-2, rgba(42,15,8,0.65))";
+  const dashColor = accent
+    ? "var(--accent, #3250FF)"
+    : "var(--ink-faint, rgba(42,15,8,0.4))";
+
   return (
     <div>
       <p
         style={{
-          fontFamily: 'var(--mono)',
-          fontSize: 11,
-          letterSpacing: '0.16em',
-          textTransform: 'uppercase',
-          color: accent ? 'var(--accent)' : 'var(--grey-2)',
+          fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
+          fontSize: 12,
+          fontWeight: 600,
+          letterSpacing: "0.16em",
+          textTransform: "uppercase",
+          color: labelColor,
           margin: 0,
           marginBottom: 14,
         }}
       >
         {label}
       </p>
-      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <ul
+        style={{
+          listStyle: "none",
+          padding: 0,
+          margin: 0,
+          display: "flex",
+          flexDirection: "column",
+          gap: 10,
+        }}
+      >
         {items.map((item, i) => (
           <li
             key={i}
             style={{
-              fontFamily: 'var(--sans)',
+              fontFamily: "var(--sans, 'Plus Jakarta Sans', sans-serif)",
               fontSize: 15,
               lineHeight: 1.55,
-              color: 'var(--grey-1)',
+              color: "var(--ink, #0A0A0F)",
               paddingLeft: 18,
-              position: 'relative',
+              position: "relative",
             }}
           >
             <span
-              aria-hidden="true"
+              aria-hidden
               style={{
-                position: 'absolute',
+                position: "absolute",
                 left: 0,
-                top: '0.7em',
+                top: "0.7em",
                 width: 8,
                 height: 1,
-                background: accent ? 'var(--accent)' : 'var(--grey-3)',
+                background: dashColor,
               }}
             />
             {item}

@@ -1,44 +1,58 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import MetaGrid from './MetaGrid';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import MetaGrid from "./MetaGrid";
 
-const meta = {
-  title: 'UI/MetaGrid',
+const meta: Meta<typeof MetaGrid> = {
+  title: "Case Study/MetaGrid",
   component: MetaGrid,
-  parameters: {
-    layout: 'padded',
-    docs: {
-      description: {
-        component:
-          'Case study metadata strip: 4 columns on desktop, 2 on mobile. Each cell is a mono label + value. Used near the top of a case study to communicate role, timeline, team, platform.',
-      },
-    },
-  },
-  args: {
-    items: [
-      { label: 'Role', value: 'Sole Designer' },
-      { label: 'Timeline', value: '2024 — Ongoing' },
-      { label: 'Team', value: '1 PM, 4 Engineers' },
-      { label: 'Platform', value: 'Web, B2B SaaS' },
-    ],
-  },
-} satisfies Meta<typeof MetaGrid>;
+  parameters: { layout: "padded" },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof MetaGrid>;
 
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
+const ITEMS = [
+  { label: "Role", value: "Lead product designer" },
+  { label: "Team", value: "Solo design, 4 engineers" },
+  { label: "Platform", value: "Web — desktop first" },
+  { label: "Sector", value: "B2B SaaS operations" },
+];
 
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--content-padding)",
+  background: "#F4F4F0",
+};
 
-export const TwoItems: Story = {
-  args: {
-    items: [
-      { label: 'Role', value: 'Lead Designer' },
-      { label: 'Timeline', value: '2023' },
-    ],
-  },
+export const Default: Story = {
+  render: () => (
+    <div style={wrap}>
+      <MetaGrid items={ITEMS} />
+    </div>
+  ),
+};
+
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <MetaGrid items={ITEMS} />
+    </div>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <MetaGrid items={ITEMS} />
+    </div>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <div style={{ ...wrap, padding: "48px var(--content-padding)" }}>
+      <MetaGrid items={ITEMS} />
+    </div>
+  ),
 };

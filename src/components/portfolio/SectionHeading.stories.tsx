@@ -1,45 +1,73 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
-import SectionHeading from './SectionHeading';
-import SectionLabel from './SectionLabel';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import SectionHeading from "./SectionHeading";
 
-const meta = {
-  title: 'UI/Typography/SectionHeading',
+const meta: Meta<typeof SectionHeading> = {
+  title: "UI/SectionHeading",
   component: SectionHeading,
-  parameters: {
-    layout: 'padded',
-    docs: {
-      description: {
-        component:
-          'Display H3 used as the primary section title inside case studies. Fluid sizing: clamp(28px, 3.5vw, 40px). Pair with SectionLabel above.',
-      },
-    },
-  },
-  argTypes: {
-    children: { control: 'text', description: 'Heading text.' },
-    className: { control: 'text', description: 'Optional Tailwind classes (e.g. "mb-2").' },
-  },
-  args: {
-    children: 'Designing for moments of decision',
-    className: '',
-  },
-} satisfies Meta<typeof SectionHeading>;
+  parameters: { layout: "padded" },
+};
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof SectionHeading>;
 
-const desktop = { value: 'desktop', isRotated: false };
-const tablet = { value: 'tablet', isRotated: false };
-const mobile = { value: 'mobile', isRotated: false };
+const wrap: React.CSSProperties = {
+  padding: "64px var(--content-padding)",
+  background: "#F4F4F0",
+  display: "flex",
+  flexDirection: "column",
+  gap: 64,
+};
 
-export const Desktop: Story = { globals: { viewport: desktop } };
-export const Tablet: Story = { globals: { viewport: tablet } };
-export const Mobile: Story = { globals: { viewport: mobile } };
+export const Variants: Story = {
+  render: () => (
+    <div style={wrap}>
+      <SectionHeading>The challenge</SectionHeading>
+      <SectionHeading label="Approach">Three layered problems</SectionHeading>
+      <SectionHeading
+        label="Selected work"
+        description="A focused selection of recent product design work — case studies on the systems and infrastructure behind operational SaaS."
+      >
+        Designing for high-stakes workflows
+      </SectionHeading>
+      <SectionHeading align="center" label="Reflection">
+        What I learned shipping the vendor portal
+      </SectionHeading>
+    </div>
+  ),
+};
 
-export const WithLabel: Story = {
-  render: (args) => (
-    <div>
-      <SectionLabel>Approach</SectionLabel>
-      <SectionHeading {...args} />
+export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <SectionHeading
+        label="Approach"
+        description="Three layered problems shaped the entire design system — each had to be solved in service of the others."
+      >
+        Three layered problems
+      </SectionHeading>
+    </div>
+  ),
+};
+
+export const Tablet: Story = {
+  globals: { viewport: { value: "tablet", isRotated: false } },
+  render: () => (
+    <div style={wrap}>
+      <SectionHeading label="Approach" description="Three layered problems shaped the design system.">
+        Three layered problems
+      </SectionHeading>
+    </div>
+  ),
+};
+
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+  render: () => (
+    <div style={{ ...wrap, padding: "48px var(--content-padding)" }}>
+      <SectionHeading label="Approach" description="Three layered problems shaped the design system.">
+        Three layered problems
+      </SectionHeading>
     </div>
   ),
 };

@@ -1,39 +1,60 @@
-import Image from 'next/image';
+"use client";
 
-interface UserGroupSection {
+import type { LucideIcon } from "lucide-react";
+
+type Section = {
   label: string;
   content: string;
-}
+};
 
-interface UserGroupCardProps {
-  iconSrc: string;
-  iconAlt: string;
+type Props = {
+  /** Optional Lucide icon. If absent, renders an initial avatar. */
+  icon?: LucideIcon;
   name: string;
-  sections: UserGroupSection[];
-}
+  sections: Section[];
+};
 
-export default function UserGroupCard({ iconSrc, iconAlt, name, sections }: UserGroupCardProps) {
+export default function UserGroupCard({ icon: Icon, name, sections }: Props) {
   return (
     <div
       style={{
-        background: 'var(--accent-tint)',
-        borderRadius: 'var(--r-md)',
-        padding: '32px 24px',
-        display: 'flex',
-        flexDirection: 'column',
+        background: "var(--accent-tint, #E5E9FF)",
+        borderRadius: "var(--warm-radius-md, 12px)",
+        padding: "32px 24px",
+        display: "flex",
+        flexDirection: "column",
         gap: 20,
+        border: "1px solid var(--hair-color, rgba(42,15,8,0.12))",
       }}
     >
-      <div style={{ position: 'relative', width: 114, height: 114, margin: '0 auto' }}>
-        <Image src={iconSrc} alt={iconAlt} fill className="object-contain" unoptimized />
+      <div
+        style={{
+          width: 96,
+          height: 96,
+          margin: "0 auto",
+          borderRadius: "50%",
+          background: "var(--paper-card, #FFFFFF)",
+          border: "1px solid var(--border-color, rgba(42,15,8,0.2))",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "var(--accent, #3250FF)",
+          fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
+          fontSize: 32,
+          fontWeight: 600,
+          letterSpacing: "-0.02em",
+        }}
+      >
+        {Icon ? <Icon size={36} strokeWidth={1.5} aria-hidden="true" /> : name.charAt(0)}
       </div>
       <h5
         style={{
-          fontFamily: 'var(--sans)',
-          fontWeight: 500,
+          fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
+          fontWeight: 600,
           fontSize: 20,
-          color: 'var(--ink)',
-          textAlign: 'center',
+          letterSpacing: "-0.015em",
+          color: "var(--ink, #0A0A0F)",
+          textAlign: "center",
           margin: 0,
         }}
       >
@@ -43,17 +64,27 @@ export default function UserGroupCard({ iconSrc, iconAlt, name, sections }: User
         <div key={section.label}>
           <p
             style={{
-              fontFamily: 'var(--mono)',
-              fontSize: 10,
-              letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              color: 'var(--grey-2)',
+              fontFamily: "var(--display, 'Plus Jakarta Sans', sans-serif)",
+              fontSize: 11,
+              fontWeight: 600,
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              color: "var(--accent, #3250FF)",
+              margin: 0,
               marginBottom: 6,
             }}
           >
             {section.label}
           </p>
-          <p style={{ fontSize: 14, lineHeight: 1.55, color: 'var(--grey-1)' }}>
+          <p
+            style={{
+              fontFamily: "var(--sans, 'Plus Jakarta Sans', sans-serif)",
+              fontSize: 14,
+              lineHeight: 1.55,
+              color: "var(--ink, #0A0A0F)",
+              margin: 0,
+            }}
+          >
             {section.content}
           </p>
         </div>
